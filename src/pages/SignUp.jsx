@@ -9,10 +9,10 @@ function SignUp() {
   const [resError, setReserror] = useState(null)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
-    name: 'omarov',
-    phone: '1234',
-    email: 'aaa@fasf.aa',
-    password: '1234567'
+    name: '',
+    phone: '',
+    email: '',
+    password: ''
   });
   //set signup params. state
   const handleChange = (e) => {
@@ -53,6 +53,14 @@ function SignUp() {
     try{
       await createUserWithEmailAndPassword(auth, formData.email, formData.password) // => response
       window.location.href = "/"
+      fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/users.json",
+      {
+        method: "POST",
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
       // console.log(response._tokenResponse.idToken)
     }catch(error){
       switch (error.code) {

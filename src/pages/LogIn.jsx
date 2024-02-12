@@ -1,5 +1,7 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { auth } from '../firebase';
 
 
 function LogIn() {
@@ -7,6 +9,7 @@ function LogIn() {
     email: '',
     password: ''
   });
+  const[error,setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,10 +18,35 @@ function LogIn() {
       [name]: value
     }))
   }
+  const handleLogIn = async () =>{
+    try{
+      await signInWithEmailAndPassword(auth,formData.email, formData.password)
+      window.location.href = "/"
+    }catch(error){
+      switch (error.code) {
+        case 'auth/user-not-found':
+          setError('User not found.');
+          setLoading(false)
+          break;
+        case 'auth/wrong-password':
+          setError('Wrong password.');
+          setLoading(false)
+          break;
+        case 'auth/invalid-email':
+          setError('Invalid email address.');
+          setLoading(false)
+          break;
+        default:
+          setError('An error occurred while logging in.');
+          setLoading(false)
+      }
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
-    console.log("submitted")
+    setError(null)
+    handleLogIn()
   }
   return (
     <div className='signup'>
@@ -27,12 +55,11 @@ function LogIn() {
           <div className="spinner-border text-primary border-5" role="status">
             <span className="sr-only"></span>
           </div>
-          <p className='text-primary fs-1 mt-2'>coming soon</p>
-          <Link to="/" className='btn btn-outline-primary mt-3'>Go Home Page</Link>
         </div>
         
       ):(null)}
       <h1 className=''>Log In</h1>
+      {error ? (<p className='alert alert-warning w-100 mt-4'>{error}</p>) : (null)}
       <form onSubmit={handleSubmit} className='mt-4'>
         <div className="mb-3 w-100">
           <label htmlFor="email" className="form-label">E-Mail</label>
