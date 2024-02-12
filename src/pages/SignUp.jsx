@@ -1,16 +1,19 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { auth } from '../firebase'
+
+
 function SignUp() {
   const [error, setError] = useState(null)
   const [resError, setReserror] = useState(null)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    password: ''
+    name: 'omarov',
+    phone: '1234',
+    email: 'aaa@fasf.aa',
+    password: '1234567'
   });
-
   //set signup params. state
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,14 +24,14 @@ function SignUp() {
   }
 
   //check inputs correct or incorrect
-  function handleCheck() {
+   function handleCheck() {
     if(formData.name.length<1){
       setReserror(null)
       return "Invalid Full Name (in Full Name must have characters!)";
     } else if (formData.name.includes(".") || formData.name.includes(",")) {
       setReserror(null)
       return "Invalid Full Name (in Full Name must not have this (. ,) characters!)";
-    } else if(formData.phone == ""){
+    } else if(formData.phone === ""){
       setReserror(null)
       return "Invalid Phone Number";
     } else if(formData.email.length<1){
@@ -40,57 +43,34 @@ function SignUp() {
     } else {
       setLoading(true)
       setReserror(null)
-      let { email, password } = formData
-      signup(email, password)
+      handleSignUp()
       return null
     }
   }
 
   //senda data to database
-  const signup = async (email, password) => {
-    try {
-      const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + "AIzaSyD6HhaVEgy7ElONyzbj4s4WQo9yfZ9OnBk",
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-            returnSecureToken: true,
-          }),
-        })
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error.message);
-      } else {
-        fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/users.json",
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-          })
-        window.location.href = "/"
-        const responseData = await response.json();
-        const token = responseData.idToken; //get token
-        console.log(token); //console token
-      }
-    } catch (err) {
-      if (err.message == "EMAIL_EXISTS") {
-        setReserror("The email address is already in use by another account.")
-        setLoading(false)
-      } else if (err.message == "OPERATION_NOT_ALLOWED") {
-        setReserror("Password sign-in is disabled for this project.")
-        setLoading(false)
-      } else if (err.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
-        setReserror("We have blocked all requests from this device due to unusual activity. Try again later.")
-        setLoading(false)
-      } else {
-        setReserror("An unexpected error occurred!")
-        setLoading(false)
+  const handleSignUp = async () =>{
+    try{
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password) // => response
+      window.location.href = "/"
+      // console.log(response._tokenResponse.idToken)
+    }catch(error){
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          setError('Email address is already in use.');
+          setLoading(false)
+          break;
+        case 'auth/weak-password':
+          setError('Password should be at least 6 characters.');
+          setLoading(false)
+          break;
+        case 'auth/invalid-email':
+          setError('Invalid email address.');
+          setLoading(false)
+          break;
+        default:
+          setError('An error occurred while signing up.');
+          setLoading(false)
       }
     }
   }
