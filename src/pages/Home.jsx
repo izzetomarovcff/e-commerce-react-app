@@ -6,9 +6,9 @@ function Home() {
   const [authUser, setAuthUser] = useState()
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
+      // console.log(user.stsTokenManager.isExpired) check token status
       if (user) {
         setAuthUser(user)
-
       } else {
         setAuthUser(null)
         window.location.href = `/signup`
