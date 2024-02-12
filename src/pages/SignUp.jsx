@@ -25,6 +25,7 @@ function SignUp() {
       setReserror(null)
       return "Password must be at least 6 characters long!"
     }else{
+      setLoading(true)
       setReserror(null)
       fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/users.json",{
         method: 'POST',
@@ -43,7 +44,7 @@ function SignUp() {
   }
    const  handleSubmit  = (e) => {
     e.preventDefault()
-    setLoading(true)
+    
     setError(handleCheck())
   }
   return (
