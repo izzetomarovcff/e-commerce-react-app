@@ -46,7 +46,7 @@ function SignUp() {
   }
   return (
     <div className='signup'>
-      <h1 className='mt-5'>Sign Up</h1>
+      <h1 className=''>Sign Up</h1>
       {error ? (<p className='alert alert-warning w-100 mt-4'>{error}</p>) : (null)}
       {resError ? (<p className='alert alert-danger w-100 mt-4'>{resError}</p>) : (null)}
       <form onSubmit={handleSubmit} className='mt-4'>
@@ -67,7 +67,7 @@ function SignUp() {
           <input type="password" name='password' className="form-control" id="password" value={formData.password} onChange={handleChange} autoComplete='off' placeholder='min 6 chars' required />
         </div>
         <button type='submit' className='btn btn-primary w-100 mt-3'>SIGN UP</button>
-        <Link to="/login" className='btn btn-outline-primary w-100 mt-3 mb-5'>Already have an account?</Link>
+        <Link to="/login" className='btn btn-outline-primary w-100 mt-3'>Already have an account?</Link>
       </form>
     </div>
   )

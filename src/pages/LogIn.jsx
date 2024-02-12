@@ -19,7 +19,7 @@ function LogIn() {
   }
   return (
     <div className='signup'>
-      <h1 className='mt-5'>Log In</h1>
+      <h1 className=''>Log In</h1>
       <form onSubmit={handleSubmit} className='mt-4'>
         <div className="mb-3 w-100">
           <label htmlFor="email" className="form-label">E-Mail</label>
@@ -30,7 +30,7 @@ function LogIn() {
           <input type="password" name='password' className="form-control" id="password" value={formData.password} onChange={handleChange} autoComplete='off' placeholder='min 6 chars' required />
         </div>
         <button type='submit' className='btn btn-primary w-100 mt-3'>LOG IN</button>
-        <Link to="/signup" className='btn btn-outline-primary w-100 mt-3 mb-5'>Don't have an account?</Link>
+        <Link to="/signup" className='btn btn-outline-primary w-100 mt-3'>Don't have an account?</Link>
       </form>
     </div>
   )
