@@ -50,7 +50,7 @@ function SignUp() {
   return (
     <div className='signup'>
       {loading?(
-        <div className='loading-overlay'>
+        <div className='loading-overlay bg-secondary'>
           <div className="spinner-border text-primary border-5" role="status">
             <span className="sr-only"></span>
           </div>
