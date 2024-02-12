@@ -6,6 +6,7 @@ function LogIn() {
     email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -15,10 +16,21 @@ function LogIn() {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
     console.log("submitted")
   }
   return (
     <div className='signup'>
+      {loading?(
+        <div className='loading-overlay'>
+          <div className="spinner-border text-primary border-5" role="status">
+            <span className="sr-only"></span>
+          </div>
+          <p className='text-primary fs-1 mt-2'>coming soon</p>
+          <Link to="/" className='btn btn-outline-primary mt-3'>Go Home Page</Link>
+        </div>
+        
+      ):(null)}
       <h1 className=''>Log In</h1>
       <form onSubmit={handleSubmit} className='mt-4'>
         <div className="mb-3 w-100">

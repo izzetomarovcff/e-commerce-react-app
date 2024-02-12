@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 function SignUp() {
   const [error, setError] = useState(null)
   const [resError, setReserror] = useState(null)
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -42,10 +43,19 @@ function SignUp() {
   }
    const  handleSubmit  = (e) => {
     e.preventDefault()
+    setLoading(true)
     setError(handleCheck())
   }
   return (
     <div className='signup'>
+      {loading?(
+        <div className='loading-overlay'>
+          <div className="spinner-border text-primary border-5" role="status">
+            <span className="sr-only"></span>
+          </div>
+        </div>
+        
+      ):(null)}
       <h1 className=''>Sign Up</h1>
       {error ? (<p className='alert alert-warning w-100 mt-4'>{error}</p>) : (null)}
       {resError ? (<p className='alert alert-danger w-100 mt-4'>{resError}</p>) : (null)}
