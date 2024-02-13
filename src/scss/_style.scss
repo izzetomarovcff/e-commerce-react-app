@@ -5,6 +5,9 @@
     box-sizing: 0;
     font-family: "Montserrat", sans-serif;
 }
+body{
+    overflow-x: hidden;
+}
 ::-webkit-scrollbar {
     width: 0px;
   }
@@ -59,4 +62,35 @@ body{
 .loading-overlay .spinner-border{
     width: 100px;
     height: 100px;
+}
+.footernavbar{
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.navitem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.navitem img{
+    width: 20px;
+    height: 20px;
+}
+.navitem:first-child{
+    color: $primary;
+}
+.navitem p{
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    font-weight: 700;
 }
