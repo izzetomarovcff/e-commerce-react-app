@@ -68,7 +68,7 @@ body{
     bottom: 0;
     background-color: #fff;
     width: 100%;
-    height: 50px;
+    height: 70px;
     border-radius: 10px 10px 0 0;
     display: flex;
     flex-direction: row;
@@ -82,8 +82,8 @@ body{
     justify-content: center;
 }
 .navitem img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 .navitem:first-child{
     color: $primary;
