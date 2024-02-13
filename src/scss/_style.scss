@@ -8,6 +8,12 @@
 ::-webkit-scrollbar {
     width: 0px;
   }
+button{
+    border-radius: 25px!important;
+}
+.btn-outline-primary{
+    border-radius: 25px!important;
+}
 body{
     background-color: $secondary;
 }

@@ -82,6 +82,7 @@ function LogIn() {
           <label htmlFor="password" className="form-label">Password</label>
           <input type="password" name='password' className="form-control" id="password" value={formData.password} onChange={handleChange} autoComplete='off' placeholder='min 6 chars' required />
         </div>
+        <Link to="/forgetpassword">Forgot your password?</Link>
         <button type='submit' className='btn btn-primary w-100 mt-3'>LOG IN</button>
         <Link to="/signup" className='btn btn-outline-primary w-100 mt-3'>Don't have an account?</Link>
       </form>
