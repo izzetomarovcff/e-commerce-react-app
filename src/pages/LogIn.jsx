@@ -1,5 +1,5 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react'
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase';
 
@@ -11,6 +11,19 @@ function LogIn() {
   });
   const[error,setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      // console.log(user.email) //check token status
+      if (user) {
+        window.location.href = "/"
+      } else {
+        
+      }
+    })
+    return () => {
+      listen()
+    }
+  },[])
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({

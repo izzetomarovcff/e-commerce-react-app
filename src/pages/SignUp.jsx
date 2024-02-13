@@ -1,5 +1,5 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import React, { useState } from 'react'
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
 
@@ -22,7 +22,19 @@ function SignUp() {
       [name]: value
     }))
   }
-
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      // console.log(user.email) //check token status
+      if (user) {
+        window.location.href= "/"
+      } else {
+        
+      }
+    })
+    return () => {
+      listen()
+    }
+  },[])
   //check inputs correct or incorrect
    function handleCheck() {
     if(formData.name.length<1){
