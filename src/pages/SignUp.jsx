@@ -61,6 +61,7 @@ function SignUp() {
         },
         body: JSON.stringify(formData)
       })
+      window.location.href = "/"
       // console.log(response._tokenResponse.idToken)
     }catch(error){
       switch (error.code) {
