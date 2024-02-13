@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../firebase'
-import Footernavbar from "../components/Footernavbar"
+import Footernavbar from '../components/Footernavbar'
 function Home() {
   const [authUser, setAuthUser] = useState()
   useEffect(() => {

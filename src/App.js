@@ -3,6 +3,10 @@ import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import Home from './pages/Home';
 import ForgotPassword from './pages/ForgotPassword';
+import Shop from './pages/Shop';
+import Cart from './pages/Cart';
+import Favorites from './pages/Favorites';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -11,6 +15,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/forgetpassword" element={<ForgotPassword />} />
