@@ -84,7 +84,7 @@ function Home() {
         </div>
 
       </div>
-      <Link to={"/shop"}>
+      <Link to={"/shop"} className='mt-3'>
         <div className='catalog'>
           <div className='catalogtext'>New Collection</div>
         </div>
