@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import Footernavbar from '../components/Footernavbar'
-import { Link } from 'react-router-dom'
+import productdata from '../static/ProductData'
 function Home() {
   const [authUser, setAuthUser] = useState()
   useEffect(() => {
@@ -27,89 +27,59 @@ function Home() {
           <h1 className='mb-3'>Fashion<br></br>Sale</h1>
           <a href='#salesection' className='btn btn-primary px-5'>Check</a>
         </div>
-
       </div>
       <div id='salesection' className='pt-5'>
         <h1 className='px-3'>Sale</h1>
         <p className='px-3'>Super Summer Sale</p>
         <div className='saleproduct '>
-
-          <div className="product mx-3" >
-            <div className='productimg'>
-              <img src="image/home/sale/sale1.svg" alt="product" />
-              <div className='saleper bg-primary'>-20%</div>
-            </div>
-            <div className='d-flex mt-2'>
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <p className='mb-0 fs-6'>(10)</p>
-            </div>
-            <p className='mb-1 mt-1'>Brend Name</p>
-            <h6>Product Name</h6>
-            <div className='d-flex'><del >15$</del><p className='text-primary ms-2 newprice'>12$</p></div>
-            <div className='addfav shadow-sm'><img src="image/home/sale/heart.svg" alt="" /></div>
-          </div>
-          <div className="product mx-3" >
-            <div className='productimg'>
-              <img src="image/home/sale/sale1.svg" alt="product" />
-              <div className='saleper bg-primary'>-20%</div>
-            </div>
-            <div className='d-flex mt-2'>
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <p className='mb-0 fs-6'>(10)</p>
-            </div>
-            <p className='mb-1 mt-1'>Brend Name</p>
-            <h6>Product Name</h6>
-            <div className='d-flex'><del >15$</del><p className='text-primary ms-2 newprice'>12$</p></div>
-            <div className='addfav shadow-sm'><img src="image/home/sale/heart.svg" alt="" /></div>
-          </div>
-          <div className="product mx-3" >
-            <div className='productimg'>
-              <img src="image/home/sale/sale1.svg" alt="product" />
-              <div className='saleper bg-primary'>-20%</div>
-            </div>
-            <div className='d-flex mt-2'>
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <p className='mb-0 fs-6'>(10)</p>
-            </div>
-            <p className='mb-1 mt-1'>Brend Name</p>
-            <h6>Product Name</h6>
-            <div className='d-flex'><del >15$</del><p className='text-primary ms-2 newprice'>12$</p></div>
-            <div className='addfav shadow-sm'><img src="image/home/sale/heart.svg" alt="" /></div>
-          </div>
-          <div className="product mx-3" >
-            <div className='productimg'>
-              <img src="image/home/sale/sale1.svg" alt="product" />
-              <div className='saleper bg-primary'>-20%</div>
-            </div>
-            <div className='d-flex mt-2'>
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <img src="image/home/sale/star.svg" alt="" />
-              <p className='mb-0 fs-6'>(10)</p>
-            </div>
-            <p className='mb-1 mt-1'>Brend Name</p>
-            <h6>Product Name</h6>
-            <div className='d-flex'><del >15$</del><p className='text-primary ms-2 newprice'>12$</p></div>
-            <div className='addfav shadow-sm'><img src="image/home/sale/heart.svg" alt="" /></div>
-          </div>
-          
-          
-
-
+          {productdata.filter(product => product.isSale).map((product, keyproduct) => {
+            return (
+              <div className="product mx-3" key={keyproduct} >
+                <div className='productimg'>
+                  <img src={product.imgUrl} alt="product" />
+                  {product.isSale ? (<div className='saleper bg-primary'>-{product.salePer}%</div>) : (null)}
+                  {product.isNew ? (<div className='saleper bg-dark'>new</div>) : (null)}
+                </div>
+                <div className='d-flex mt-2'>
+                  {product.starCount.map((element, keystar) => {
+                    return (<img src="image/home/sale/star.svg" alt="" key={keystar} />)
+                  })}
+                  <p className='mb-0 fs-6'>({product.starPoint})</p>
+                </div>
+                <p className='mb-1 mt-1'>{product.brandName}</p>
+                <h6>{product.productName}</h6>
+                <div className='d-flex'>{product.isSale ? (<del className='me-2' >{product.oldPrice} $</del>) : (null)}<p className='text-primary newprice'>{product.price} $</p></div>
+                <div className='addfav shadow-sm'><img src="image/home/sale/heart.svg" alt="" /></div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      <div id='salesection' className='pt-5'>
+        <h1 className='px-3'>New</h1>
+        <p className='px-3'>You've never seen it before!</p>
+        <div className='saleproduct '>
+        {productdata.filter(product => product.isNew).map((product, keyproduct) => {
+            return (
+              <div className="product mx-3" key={keyproduct} >
+                <div className='productimg'>
+                  <img src={product.imgUrl} alt="product" />
+                  {product.isSale ? (<div className='saleper bg-primary'>-{product.salePer}%</div>) : (null)}
+                  {product.isNew ? (<div className='saleper bg-dark'>NEW</div>) : (null)}
+                </div>
+                <div className='d-flex mt-2'>
+                  {product.starCount.map((element, keystar) => {
+                    return (<img src="image/home/sale/starinactive.svg" alt="" key={keystar} />)
+                  })}
+                  <p className='mb-0 fs-6'>({product.starPoint})</p>
+                </div>
+                <p className='mb-1 mt-1'>{product.brandName}</p>
+                <h6>{product.productName}</h6>
+                <div className='d-flex'>{product.isSale ? (<del className='me-2' >{product.oldPrice} $</del>) : (null)}<p className='text-dark newprice'>{product.price} $</p></div>
+                <div className='addfav shadow-sm'><img src="image/home/sale/heart.svg" alt="" /></div>
+              </div>
+            )
+          })}
         </div>
       </div>
 
