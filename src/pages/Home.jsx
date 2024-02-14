@@ -29,7 +29,7 @@ function Home() {
         </div>
 
       </div>
-      <div id='salesection' className='mt-5'>
+      <div id='salesection' className='pt-5'>
         <h1 className='px-3'>Sale</h1>
         <p className='px-3'>Super Summer Sale</p>
         <div className='saleproduct '>
