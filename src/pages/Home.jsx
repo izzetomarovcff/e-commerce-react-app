@@ -3,6 +3,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import Footernavbar from '../components/Footernavbar'
 import productdata from '../static/ProductData'
+import { Link } from 'react-router-dom'
 function Home() {
   const [authUser, setAuthUser] = useState()
   useEffect(() => {
@@ -59,7 +60,7 @@ function Home() {
         <h1 className='px-3'>New</h1>
         <p className='px-3'>You've never seen it before!</p>
         <div className='saleproduct '>
-        {productdata.filter(product => product.isNew).map((product, keyproduct) => {
+          {productdata.filter(product => product.isNew).map((product, keyproduct) => {
             return (
               <div className="product mx-3" key={keyproduct} >
                 <div className='productimg'>
@@ -81,6 +82,35 @@ function Home() {
             )
           })}
         </div>
+
+      </div>
+      <Link to={"/shop"}>
+        <div className='catalog'>
+          <div className='catalogtext'>New Collection</div>
+        </div>
+      </Link>
+
+      <div className='othercatalog'>
+        <div className='othercatalog1'>
+          <Link to={"/shop"}>
+            <div className='othercatalog11'>
+              <div className='othercatalog11text'>Summer<br></br>sale</div>
+            </div>
+          </Link>
+
+          <Link to={"/shop"}>
+            <div className='othercatalog12'>
+              <div className='othercatalog12text'>Black</div>
+            </div>
+          </Link>
+
+        </div>
+        <Link to={"/shop"}>
+          <div className='othercatalog2'>
+            <div className='catalog2text'>Men's<br></br>hoodies</div>
+          </div>
+        </Link>
+
       </div>
 
       <Footernavbar />

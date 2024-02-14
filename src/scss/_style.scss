@@ -45,7 +45,7 @@ body{
     width: 100vw;
     display: flex;
     flex-direction: column;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
 }
 .loading-overlay{
     position: absolute;
@@ -176,4 +176,81 @@ del{
     top: 167px;
     border-radius: 50%;
     padding: 5px;
+}
+.catalog{
+    width: 100vw;
+    height: 366px;
+    background-image: url(../../public/image/home/catalog//newcollection.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: end;
+}
+.catalogtext{
+    margin: 10px 20px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+}
+.othercatalog{
+    width: 100vw;
+    height: 374px;
+    display: flex;
+    flex-direction: row;
+}
+.othercatalog1, .othercatalog2{
+    width: 50vw;
+    height: 374px;
+}
+.othercatalog1{
+    display: flex;
+    flex-direction: column;
+}
+.othercatalog11{
+    width: 50vw;
+    height: 187px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.othercatalog11text{
+    color: $primary;
+    font-size: 25px;
+    font-weight: 700;
+}
+.othercatalog12{
+    width: 50vw;
+    height: 187px;
+    background-image: url(../../public/image/home/catalog/black.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+}
+.othercatalog12text{
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 0 40px 20px;
+}
+.othercatalog2{
+    background-image: url(../../public/image/home/catalog/mens.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.catalog2text{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+}
+a{
+    text-decoration: none;
 }
