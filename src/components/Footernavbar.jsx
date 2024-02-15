@@ -1,4 +1,6 @@
+import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
+import { auth } from '../firebase'
 
 function Footernavbar() {
   const [iconpath,setIconPath] = useState({
@@ -6,25 +8,44 @@ function Footernavbar() {
     shop: "icons/shop.svg",
     cart: "icons/cart.svg",
     favorites: "icons/favorites.svg",
-    profile: "icons/profile.svg"
+    profile: "icons/profile.svg",
+    admin: "icons/profile.svg"
   })
+  const [authUser, setAuthUser] = useState(null)
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      // console.log(user.email) //check token status
+      if (user) {
+        setAuthUser(user)
+        // console.log(authUser.email)
+      } else {
+        setAuthUser(null)
+      }
+    })
+    return () => {
+      listen()
+    }
+  }, [])
   useEffect(()=>{
     switch(window.location.pathname){
       case "/":
-        setIconPath({...iconpath, home:"icons/homeactive.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg"})
+        setIconPath({...iconpath, home:"icons/homeactive.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg", admin:"icons/profile.svg"})
         break;
       case "/shop":
-        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shopactive.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg"})
+        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shopactive.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg",admin:"icons/profile.svg"})
         break;
       case "/cart":
-        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cartactive.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg"})
+        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cartactive.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg",admin:"icons/profile.svg"})
         break;
       case "/favorites":
-        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favoritesactive.svg",profile:"icons/profile.svg"})
+        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favoritesactive.svg",profile:"icons/profile.svg",admin:"icons/profile.svg"})
         break;
       case "/profile":
-        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profileactive.svg"})
+        setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profileactive.svg",admin:"icons/profile.svg"})
         break;
+      case "/admin":
+          setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg",admin:"icons/profileactive.svg"})
+          break;
     }
     
   },[])
@@ -45,6 +66,9 @@ function Footernavbar() {
       case "profile":
         window.location.pathname="/profile"
         break;
+        case "admin":
+          window.location.pathname="/admin"
+          break;
     }
   }
   return (
@@ -69,6 +93,13 @@ function Footernavbar() {
         <img src={iconpath.profile} alt="" />
         <p>Profile</p>
       </div>
+      {authUser ? (authUser.email == "izzetomarovcff@gmail.com"?(
+        <div className='navitem' onClick={()=>handleClick("admin")}>
+        <img src={iconpath.admin} alt="" />
+        <p>Admin</p>
+      </div>
+      ):(null)):(null)}
+      
     </div>
   )
 }
