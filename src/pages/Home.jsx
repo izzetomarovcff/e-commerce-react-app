@@ -13,7 +13,7 @@ function Home() {
         setAuthUser(user)
       } else {
         setAuthUser(null)
-        window.location.href = "/login"
+        window.location.href = "/signup"
       }
     })
     return () => {
