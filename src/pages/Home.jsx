@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
+import React, { useEffect } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
 import Footernavbar from '../components/Footernavbar'
 import productdata from '../static/ProductData'
 import { Link } from 'react-router-dom'
 function Home() {
-  const [authUser, setAuthUser] = useState()
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       // console.log(user.email) //check token status
       if (user) {
-        setAuthUser(user)
       } else {
-        setAuthUser(null)
         window.location.href = "/signup"
       }
     })

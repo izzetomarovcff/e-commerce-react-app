@@ -22,11 +22,6 @@ function Footernavbar() {
         setAuthUser(null)
       }
     })
-    return () => {
-      listen()
-    }
-  }, [])
-  useEffect(()=>{
     switch(window.location.pathname){
       case "/":
         setIconPath({...iconpath, home:"icons/homeactive.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg", admin:"icons/profile.svg"})
@@ -46,9 +41,16 @@ function Footernavbar() {
       case "/admin":
           setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg",admin:"icons/profileactive.svg"})
           break;
+      case "/admin/addproduct":
+            setIconPath({...iconpath, home:"../icons/home.svg",shop:"../icons/shop.svg",cart:"../icons/cart.svg",favorites:"../icons/favorites.svg",profile:"../icons/profile.svg",admin:"../icons/profileactive.svg"})
+            break;
+      default:
+        break;
     }
-    
-  },[])
+    return () => {
+      listen()
+    }
+  }, [])
   const handleClick = (item) =>{
     switch(item){
       case "home":
@@ -68,6 +70,8 @@ function Footernavbar() {
         break;
         case "admin":
           window.location.pathname="/admin"
+          break;
+        default:
           break;
     }
   }
@@ -93,7 +97,7 @@ function Footernavbar() {
         <img src={iconpath.profile} alt="" />
         <p>Profile</p>
       </div>
-      {authUser ? (authUser.email == "izzetomarovcff@gmail.com"?(
+      {authUser ? (authUser.email === "izzetomarovcff@gmail.com"?(
         <div className='navitem' onClick={()=>handleClick("admin")}>
         <img src={iconpath.admin} alt="" />
         <p>Admin</p>
