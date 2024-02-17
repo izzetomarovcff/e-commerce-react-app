@@ -17,7 +17,6 @@ function Admin() {
       listen()
     }
   }, [])
-  
   return (
     <div className='admin mb-4'>
       <div className=' d-flex'>
