@@ -11,6 +11,7 @@ function HaveSaleProducts() {
         for(const key in resData){
           if(resData[key].isSale){
             arr.push(resData[key])
+            console.log(resData[key])
           }
         }
         setProductData(arr)
