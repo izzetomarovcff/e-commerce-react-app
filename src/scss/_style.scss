@@ -262,8 +262,12 @@ a{
 }
 
 .admin form{
+    position: absolute;
+    top: 0px;
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin-bottom: 70px;
+    padding-bottom: 80px;
+    align-items: center;    
+    background-color: $secondary;
 }

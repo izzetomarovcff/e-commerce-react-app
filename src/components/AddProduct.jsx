@@ -60,7 +60,7 @@ function AddProduct() {
         }
     }
     return (
-        <form onSubmit={handleSubmit} className='mt-3'>
+        <form onSubmit={handleSubmit} className='pt-3'>
             <h1>Create Product</h1>
             <div className="mb-3 w-100">
                 <label htmlFor="id" className="form-label">Id</label>
@@ -112,7 +112,7 @@ function AddProduct() {
                     <div className='d-flex '><input type="checkbox" name='isNew' className="form-check" id="isNew" checked={productFormData.isNew} onChange={handleChange} autoComplete='off' placeholder='' /><p className='mb-0 ms-2'>New</p></div>
                 </div>
             )}
-            <button className='btn btn-primary'>Add Product</button>
+            <button className='btn btn-primary w-100'>Add Product</button>
             <Link to="/admin" className='btn btn-outline-primary w-100 mt-3'>Cancel</Link>
 
         </form>
