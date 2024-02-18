@@ -1,27 +1,27 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
-import { auth } from '../firebase'
+import { auth, storage } from '../firebase'
 import { Link } from 'react-router-dom'
 
 function AddProduct() {
     const [authUser, setAuthUser] = useState(null)
-
     const [productFormData, setProductFormData] = useState(
         {
-            id: "", //
-            isSale: false, //
-            salePer: "", //
-            isNew: false, //
-            imgUrl: "", //
+            id: "", 
+            isSale: false, 
+            salePer: "", 
+            isNew: false, 
+            imgUrl: "", 
             starCount: "",
-            starPoint: "", //
-            brandName: "", //
-            productName: "", //
-            oldPrice: "", //
+            starPoint: "", 
+            brandName: "", 
+            productName: "", 
+            oldPrice: "",
             price: "",
             favorite: false
         }
     )
+
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
             // console.log(user.email) //check token status
@@ -36,6 +36,7 @@ function AddProduct() {
             listen()
         }
     }, [])
+
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
         setProductFormData(prevState => ({
@@ -44,6 +45,8 @@ function AddProduct() {
         }))
         console.log(productFormData)
     }
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -59,6 +62,8 @@ function AddProduct() {
             console.log(error)
         }
     }
+    
+    
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
             <h1>Create Product</h1>
@@ -78,6 +83,7 @@ function AddProduct() {
                 <label htmlFor="imgUrl" className="form-label">Image Url</label>
                 <input type="text" name='imgUrl' className="form-control" id="imgUrl" value={productFormData.imgUrl} onChange={handleChange} autoComplete='off' placeholder='Product Image Url' required />
             </div>
+            
             {productFormData.isSale ? (
                 <div className="mb-3 w-100">
                     <label htmlFor="salePer" className="form-label">Discount percentage</label>

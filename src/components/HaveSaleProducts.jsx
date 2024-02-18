@@ -1,9 +1,30 @@
-import React from 'react'
-import productdata from '../static/ProductData'
+import React, { useEffect, useState } from 'react'
 
 function HaveSaleProducts() {
+  const [productdata,setProductData] = useState([])
+  useEffect(()=>{
+    const getData = async () =>{
+      try{
+        const response = await fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/products.json")
+        let resData = await response.json()
+        let arr = []
+        for(const key in resData){
+          if(resData[key].isSale){
+            arr.push(resData[key])
+          }
+        }
+        setProductData(arr)
+      }catch(error){
+        console.log(error)
+      }
+    }
+    return () => {
+      getData()
+    }
+  },[])
   return (
     <div id='salesection' className='pt-5'>
+        
         <h1 className='px-3'>Sale</h1>
         <p className='px-3'>Super Summer Sale</p>
         {productdata.length == 0 ? (<div className='mx-auto text-dark'>Not Have Sale Product</div>):(
@@ -17,9 +38,7 @@ function HaveSaleProducts() {
                     {product.isNew ? (<div className='saleper bg-dark'>new</div>) : (null)}
                   </div>
                   <div className='d-flex mt-2'>
-                    {product.starCount.map((element, keystar) => {
-                      return (<img src="image/home/sale/star.svg" alt="" key={keystar} />)
-                    })}
+                    {Array.from({length: product.starCount},(_, index)=><img src="image/home/sale/star.svg" alt="" key={index} />)}
                     <p className='mb-0 fs-6'>({product.starPoint})</p>
                   </div>
                   <p className='mb-1 mt-1'>{product.brandName}</p>
