@@ -11,7 +11,6 @@ function NewProducts() {
         for(const key in resData){
           if(resData[key].isNew){
             arr.push(resData[key])
-            console.log(resData[key])
           }
         }
         setProductData(arr)

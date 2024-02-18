@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
-import { auth, storage } from '../firebase'
+import { auth } from '../firebase'
 import { Link } from 'react-router-dom'
 
 function AddProduct() {
@@ -41,7 +41,7 @@ function AddProduct() {
         const { name, value, checked } = e.target;
         setProductFormData(prevState => ({
             ...prevState,
-            [name]: (name === "id" || name === "salePer" || name === "salePer" || name === "oldPrice" || name === "price" || name === "starPoint" || name === "starCount") ? (Number(value)) : (name === "isNew" || name === "isSale" ? (checked) : (value))
+            [name]: ( name === "salePer" || name === "salePer" || name === "oldPrice" || name === "price" || name === "starPoint" || name === "starCount") ? (Number(value)) : (name === "isNew" || name === "isSale" ? (checked) : (value))
         }))
         console.log(productFormData)
     }
@@ -58,6 +58,7 @@ function AddProduct() {
                     },
                     body: JSON.stringify(productFormData)
                 })
+                window.location.reload()
         } catch (error) {
             console.log(error)
         }
@@ -67,10 +68,10 @@ function AddProduct() {
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
             <h1>Create Product</h1>
-            <div className="mb-3 w-100">
+            {/* <div className="mb-3 w-100">
                 <label htmlFor="id" className="form-label">Id</label>
-                <input type="number" name='id' className="form-control" id="id" value={productFormData.id} onChange={handleChange} autoComplete='off' placeholder='Product ID' required />
-            </div>
+                <input type="text" name='id' className="form-control" id="id" value={productFormData.id} onChange={handleChange} autoComplete='off' placeholder='automatically' required disabled={true} />
+            </div> */}
             <div className="mb-3 w-100">
                 <label htmlFor="brandName" className="form-label">Brand Name</label>
                 <input type="text" name='brandName' className="form-control" id="brandName" value={productFormData.brandName} onChange={handleChange} autoComplete='off' placeholder='Product Beand Name' required />
