@@ -31,7 +31,7 @@ function Home() {
       <HaveSaleProducts/>
       <NewProducts/>
       
-      <Link to={"/shop"} className='mt-3'>
+      <Link to={"/shop"} className='mt-5'>
         <div className='catalog'>
           <div className='catalogtext'>New Collection</div>
         </div>
