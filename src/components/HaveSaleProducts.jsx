@@ -19,9 +19,8 @@ function HaveSaleProducts() {
         console.log(error)
       }
     }
-    return () => {
-      getData()
-    }
+    getData()
+    
   },[])
   return (
     <div id='salesection' className='pt-5'>
