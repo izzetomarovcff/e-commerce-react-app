@@ -65,10 +65,16 @@ function AddProduct() {
             console.log(error)
         }
     }
-    const handleClick = async() =>{
-        const imgRef =  ref(imageDb,`productimages/${v4()}`)
+    const handleImgUpload = async(e) => {
+        const selectedFile = e.target.files[0]
+        
+
+        requestDataBase(selectedFile)
+    }
+    const requestDataBase = async(selFile) =>{
+        const imgRef =  ref(imageDb,`test/${v4()}`)
         try{
-            await uploadBytes(imgRef,img)
+            await uploadBytes(imgRef,selFile)
             const downloadURL = await getDownloadURL(imgRef)
             setProductFormData(prevState=>({
                 ...prevState,
@@ -78,9 +84,6 @@ function AddProduct() {
         }catch(error){
             console.log(error)
         }
-        
-        
-        
     }
     
     
@@ -99,17 +102,7 @@ function AddProduct() {
                 <label htmlFor="productName" className="form-label">Product Name</label>
                 <input type="text" name='productName' className="form-control" id="productName" value={productFormData.productName} onChange={handleChange} autoComplete='off' placeholder='Product Name' required />
             </div>
-            <div className="mb-3 w-100">
-                <label htmlFor="img" className="form-label">Upload Image</label>
-                <div className='d-flex justify-content-between'>
-                    <input type="file" name='img' className="form-control w-75" id="imgUrl" onChange={(e)=>setImg(e.target.files[0])} />
-                    <div className='btn btn-outline-primary ' onClick={handleClick}>Upload</div>
-                </div>
-                {productFormData.imgUrl == "" ? (null): (<div className='uploadedimg w-100 mt-3'><img  src={productFormData.imgUrl} alt='productimg' className='shadow-md rounded'/></div>)}
-                
-                
-                
-            </div>            
+                       
             {productFormData.isSale ? (
                 <div className="mb-3 w-100">
                     <label htmlFor="salePer" className="form-label">Discount percentage</label>
@@ -134,6 +127,20 @@ function AddProduct() {
                 <label htmlFor="starPoint" className="form-label">Star Point</label>
                 <input type="number" name='starPoint' className="form-control" id="starPoint" value={productFormData.starPoint} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-10' required />
             </div>
+            <div className="mb-3 w-100">
+                {productFormData.imgUrl == "" ?(<label htmlFor="img" className="form-label">Upload Image</label>):(null)}
+                {productFormData.imgUrl == "" ? (<div className='d-flex justify-content-between'>
+                    <input type="file" name='img' className="form-control w-100" id="imgUrl" onChange={handleImgUpload} />
+                </div>):(null)}
+                
+                {productFormData.imgUrl == "" ? (null): (<div className='uploadedimg w-100 mt-3 rounded border shadow-sm'>
+                    <img  src={productFormData.imgUrl} alt='productimg' className='rounded  shadow'/>
+                    
+                    <div className='removeuploadedfile' onClick={()=>{setProductFormData({...productFormData,imgUrl:""})}}>
+                        <img src="../icons/close.svg" alt="" />
+                    </div>
+                </div>)}
+            </div> 
             {productFormData.isNew ? (null) : (
                 <div className="mb-3 w-100">
                     <div className='d-flex '><input type="checkbox" name='isSale' className="form-check" id="isSale" checked={productFormData.isSale} onChange={handleChange} autoComplete='off' placeholder='' /><p className='mb-0 ms-2'>Have Sale</p></div>
