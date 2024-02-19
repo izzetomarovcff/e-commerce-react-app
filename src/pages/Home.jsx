@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
 import Footernavbar from '../components/Footernavbar'
 import { Link } from 'react-router-dom'
-import productdata from '../static/ProductData'
 import NewProducts from '../components/NewProducts'
 import HaveSaleProducts from '../components/HaveSaleProducts'
 function Home() {
