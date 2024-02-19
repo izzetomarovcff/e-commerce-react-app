@@ -147,7 +147,17 @@ body{
 }
 .saleproduct .product .productimg{
     position: relative;
+    width: 148px;
+    height: 184px;
+
 }
+.saleproduct .product .productimg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 .saleproduct .product .productimg .saleper{
     position: absolute;
     top: 8px;
@@ -270,4 +280,12 @@ a{
     padding-bottom: 80px;
     align-items: center;    
     background-color: $secondary;
+}
+.uploadedimg{
+    height: 200px;
+}
+.uploadedimg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

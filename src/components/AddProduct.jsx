@@ -1,8 +1,9 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
-import { auth } from '../firebase'
+import { auth, imageDb } from '../firebase'
 import { Link } from 'react-router-dom'
-
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { v4 } from 'uuid'
 function AddProduct() {
     const [authUser, setAuthUser] = useState(null)
     const [productFormData, setProductFormData] = useState(
@@ -21,6 +22,7 @@ function AddProduct() {
             favorite: false
         }
     )
+    const [img,setImg] = useState(null)
 
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
@@ -63,6 +65,23 @@ function AddProduct() {
             console.log(error)
         }
     }
+    const handleClick = async() =>{
+        const imgRef =  ref(imageDb,`productimages/${v4()}`)
+        try{
+            await uploadBytes(imgRef,img)
+            const downloadURL = await getDownloadURL(imgRef)
+            setProductFormData(prevState=>({
+                ...prevState,
+                imgUrl: downloadURL
+            }))
+
+        }catch(error){
+            console.log(error)
+        }
+        
+        
+        
+    }
     
     
     return (
@@ -81,10 +100,16 @@ function AddProduct() {
                 <input type="text" name='productName' className="form-control" id="productName" value={productFormData.productName} onChange={handleChange} autoComplete='off' placeholder='Product Name' required />
             </div>
             <div className="mb-3 w-100">
-                <label htmlFor="imgUrl" className="form-label">Image Url</label>
-                <input type="text" name='imgUrl' className="form-control" id="imgUrl" value={productFormData.imgUrl} onChange={handleChange} autoComplete='off' placeholder='Product Image Url' required />
-            </div>
-            
+                <label htmlFor="img" className="form-label">Upload Image</label>
+                <div className='d-flex justify-content-between'>
+                    <input type="file" name='img' className="form-control w-75" id="imgUrl" onChange={(e)=>setImg(e.target.files[0])} />
+                    <div className='btn btn-outline-primary ' onClick={handleClick}>Upload</div>
+                </div>
+                {productFormData.imgUrl == "" ? (null): (<div className='uploadedimg w-100 mt-3'><img  src={productFormData.imgUrl} alt='productimg' className='shadow-md rounded'/></div>)}
+                
+                
+                
+            </div>            
             {productFormData.isSale ? (
                 <div className="mb-3 w-100">
                     <label htmlFor="salePer" className="form-label">Discount percentage</label>
