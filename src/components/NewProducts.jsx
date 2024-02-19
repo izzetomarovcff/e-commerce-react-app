@@ -10,7 +10,7 @@ function NewProducts() {
         let arr = []
         for(const key in resData){
           if(resData[key].isNew){
-            arr.push(resData[key])
+            arr.unshift(resData[key])
           }
         }
         setProductData(arr)
