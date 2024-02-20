@@ -116,7 +116,32 @@ function AddProduct() {
             }))
 
         } catch (error) {
-            console.log(error)
+            switch(error.code){
+                case "storage/unauthorized":
+                    setError(`${selFile.name} Failed To Upload To Server!\nYou Don't Have Permission To Upload Image!`)
+                    break;
+                case "storage/canceled":
+                    setError(`${selFile.name} Canceled To Upload To Server!\nTry Again!`)
+                    break;
+                case "storage/unknown":
+                    setError(`${selFile.name} Failed To Upload To Server!\nTry Again!`)
+                    break;
+                case "storage/network-error":
+                    setError(`${selFile.name} Failed To Upload To Server!\nTry Again!`)
+                    break;
+                case "file/invalid-file-type":
+                    setError(`${selFile.name} Failed To Upload To Server!\nInvalid File Type!`)
+                    break;
+                case "file/file-too-large":
+                    setError(`${selFile.name} Failed To Upload To Server!\nFile Too Large!`)
+                    break;
+                default:
+                    setError("Unknown Error Occurred\nTry Again İn a Few Minutes!")
+                    break
+            }
+            setTimeout(() => {
+                setError(null)
+            }, 2500);
         }
     }
     return (
