@@ -6,27 +6,25 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { v4 } from 'uuid'
 function AddProduct() {
     const [authUser, setAuthUser] = useState(null)
+    const [error, setError] = useState(null)
     const [productFormData, setProductFormData] = useState(
         {
-            id: "", 
-            isSale: false, 
-            salePer: "", 
-            isNew: false, 
-            imgUrl: "", 
+            id: "",
+            isSale: false,
+            salePer: "",
+            isNew: false,
+            imgUrl: "",
             starCount: "",
-            starPoint: "", 
-            brandName: "", 
-            productName: "", 
+            starPoint: "",
+            brandName: "",
+            productName: "",
             oldPrice: "",
             price: "",
             favorite: false
         }
     )
-    const [img,setImg] = useState(null)
-
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
-            // console.log(user.email) //check token status
             if (user) {
                 setAuthUser(user)
             } else {
@@ -38,19 +36,47 @@ function AddProduct() {
             listen()
         }
     }, [])
-
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
         setProductFormData(prevState => ({
             ...prevState,
-            [name]: ( name === "salePer" || name === "salePer" || name === "oldPrice" || name === "price" || name === "starPoint" || name === "starCount") ? (Number(value)) : (name === "isNew" || name === "isSale" ? (checked) : (value))
+            [name]: (name === "salePer" || name === "salePer" || name === "oldPrice" || name === "price" || name === "starPoint" || name === "starCount") ? (Number(value)) : (name === "isNew" || name === "isSale" ? (checked) : (value))
         }))
         console.log(productFormData)
     }
-    
+    function handleCheck (){
+        if(productFormData.brandName === ""){
+            return "Enter The Brand Name!"
+            
+        }else if(productFormData.productName === ""){
+            return "Enter The Product Name"
+        }else if(productFormData.price === "" || productFormData.price <= 0){
+            return "Price Can't Be Left Blank And Can't Be 0 ! (Min: 1)"
+        }else if(productFormData.starCount === "" || productFormData.starCount < 0 || productFormData.starCount> 5){
+            return "The Star Count Should Not Be Left Empty. (Min: 0, Max: 5) !"
+        }else if(productFormData.starPoint === "" || productFormData.starPoint < 0 || productFormData.starPoint> 10){
+            return "The Star Point Should Not Be Left Empty. (Min: 0, Max: 10) !"
+        }
+        else if(productFormData.imgUrl === "" ){
+            return "Please upload Product Image!"
+        }else if(productFormData.isSale){
+            if(productFormData.salePer === "" || productFormData.salePer <= 0 || productFormData.salePer > 100){
+                return "Discount percentage Should Not Be Left Empty And Can't Be 0 ! (Min: 1, Max: 100)"
+            }else if(productFormData.oldPrice === "" || productFormData.oldPrice <= 0){
+                return "Old Price Can't Be Left Blank And Can't Be 0 ! (Min: 0)"
+            }else{
+                handleAddProduct()
+                return null
+            }
+        }else{
+            handleAddProduct()
+            return null
+        }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+        
+        
+    }
+    const handleAddProduct = async() =>{
         try {
             await fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/products.json?auth=" + await authUser.getIdToken(),
                 {
@@ -60,87 +86,90 @@ function AddProduct() {
                     },
                     body: JSON.stringify(productFormData)
                 })
-                window.location.reload()
+            window.location.reload()
         } catch (error) {
             console.log(error)
         }
     }
-    const handleImgUpload = async(e) => {
-        const selectedFile = e.target.files[0]
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setError(handleCheck())
+        setTimeout(() => {
+            setError(null)
+        }, 1500);
         
+    }
+    const handleImgUpload = async (e) => {
+        const selectedFile = e.target.files[0]
+
 
         requestDataBase(selectedFile)
     }
-    const requestDataBase = async(selFile) =>{
-        const imgRef =  ref(imageDb,`test/${v4()}`)
-        try{
-            await uploadBytes(imgRef,selFile)
+    const requestDataBase = async (selFile) => {
+        const imgRef = ref(imageDb, `test/${v4()}`)
+        try {
+            await uploadBytes(imgRef, selFile)
             const downloadURL = await getDownloadURL(imgRef)
-            setProductFormData(prevState=>({
+            setProductFormData(prevState => ({
                 ...prevState,
                 imgUrl: downloadURL
             }))
 
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
     }
-    
-    
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
+            
             <h1>Create Product</h1>
-            {/* <div className="mb-3 w-100">
-                <label htmlFor="id" className="form-label">Id</label>
-                <input type="text" name='id' className="form-control" id="id" value={productFormData.id} onChange={handleChange} autoComplete='off' placeholder='automatically' required disabled={true} />
-            </div> */}
+            {error ? (<div className='alert alert-danger producterror mt-3 mb-3 w-75'>{error}</div>):(null)}
             <div className="mb-3 w-100">
                 <label htmlFor="brandName" className="form-label">Brand Name</label>
-                <input type="text" name='brandName' className="form-control" id="brandName" value={productFormData.brandName} onChange={handleChange} autoComplete='off' placeholder='Product Beand Name' required />
+                <input type="text" name='brandName' className="form-control" id="brandName" value={productFormData.brandName} onChange={handleChange} autoComplete='off' placeholder='Product Beand Name' />
             </div>
             <div className="mb-3 w-100">
                 <label htmlFor="productName" className="form-label">Product Name</label>
-                <input type="text" name='productName' className="form-control" id="productName" value={productFormData.productName} onChange={handleChange} autoComplete='off' placeholder='Product Name' required />
+                <input type="text" name='productName' className="form-control" id="productName" value={productFormData.productName} onChange={handleChange} autoComplete='off' placeholder='Product Name'  />
             </div>
-                       
             {productFormData.isSale ? (
                 <div className="mb-3 w-100">
                     <label htmlFor="salePer" className="form-label">Discount percentage</label>
-                    <input type="number" name='salePer' className="form-control" id="salePer" value={productFormData.salePer} onChange={handleChange} autoComplete='off' placeholder='Product Discount Percentage' required />
+                    <input type="number" name='salePer' className="form-control" id="salePer" value={productFormData.salePer} onChange={handleChange} autoComplete='off' placeholder='Product Discount Percentage'  />
                 </div>
             ) : (null)}
             {productFormData.isSale ? (
                 <div className="mb-3 w-100">
                     <label htmlFor="oldPrice" className="form-label">Old Price</label>
-                    <input type="number" name='oldPrice' className="form-control" id="oldPrice" value={productFormData.oldPrice} onChange={handleChange} autoComplete='off' placeholder='Before Discount Price' required />
+                    <input type="number" name='oldPrice' className="form-control" id="oldPrice" value={productFormData.oldPrice} onChange={handleChange} autoComplete='off' placeholder='Before Discount Price'  />
                 </div>
             ) : (null)}
             <div className="mb-3 w-100">
                 <label htmlFor="price" className="form-label">Price</label>
-                <input type="number" name='price' className="form-control" id="price" value={productFormData.price} onChange={handleChange} autoComplete='off' placeholder={productFormData.isSale ? ("After Discount Price") : ("Product Price")} required />
+                <input type="number" name='price' className="form-control" id="price" value={productFormData.price} onChange={handleChange} autoComplete='off' placeholder={productFormData.isSale ? ("After Discount Price") : ("Product Price")}  />
             </div>
             <div className="mb-3 w-100">
                 <label htmlFor="starCount" className="form-label">Star Count</label>
-                <input type="number" name='starCount' className="form-control" id="starCount" value={productFormData.starCount} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-10' required />
+                <input type="number" name='starCount' className="form-control" id="starCount" value={productFormData.starCount} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-5'  />
             </div>
             <div className="mb-3 w-100">
                 <label htmlFor="starPoint" className="form-label">Star Point</label>
-                <input type="number" name='starPoint' className="form-control" id="starPoint" value={productFormData.starPoint} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-10' required />
+                <input type="number" name='starPoint' className="form-control" id="starPoint" value={productFormData.starPoint} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-10'  />
             </div>
             <div className="mb-3 w-100">
-                {productFormData.imgUrl == "" ?(<label htmlFor="img" className="form-label">Upload Image</label>):(null)}
-                {productFormData.imgUrl == "" ? (<div className='d-flex justify-content-between'>
+                {productFormData.imgUrl === "" ? (<label htmlFor="img" className="form-label">Upload Image</label>) : (null)}
+                {productFormData.imgUrl === "" ? (<div className='d-flex justify-content-between'>
                     <input type="file" name='img' className="form-control w-100" id="imgUrl" onChange={handleImgUpload} />
-                </div>):(null)}
-                
-                {productFormData.imgUrl == "" ? (null): (<div className='uploadedimg w-100 mt-3 rounded border shadow-sm'>
-                    <img  src={productFormData.imgUrl} alt='productimg' className='rounded  shadow'/>
-                    
-                    <div className='removeuploadedfile' onClick={()=>{setProductFormData({...productFormData,imgUrl:""})}}>
+                </div>) : (null)}
+
+                {productFormData.imgUrl === "" ? (null) : (<div className='uploadedimg w-100 mt-3 rounded border shadow-sm'>
+                    <img src={productFormData.imgUrl} alt='productimg' className='rounded  shadow' />
+
+                    <div className='removeuploadedfile' onClick={() => { setProductFormData({ ...productFormData, imgUrl: "" }) }}>
                         <img src="../icons/close.svg" alt="" />
                     </div>
                 </div>)}
-            </div> 
+            </div>
             {productFormData.isNew ? (null) : (
                 <div className="mb-3 w-100">
                     <div className='d-flex '><input type="checkbox" name='isSale' className="form-check" id="isSale" checked={productFormData.isSale} onChange={handleChange} autoComplete='off' placeholder='' /><p className='mb-0 ms-2'>Have Sale</p></div>
@@ -153,7 +182,6 @@ function AddProduct() {
             )}
             <button className='btn btn-primary w-100'>Add Product</button>
             <Link to="/admin" className='btn btn-outline-primary w-100 mt-3'>Cancel</Link>
-
         </form>
     )
 }

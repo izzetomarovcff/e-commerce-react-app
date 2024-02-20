@@ -36,7 +36,8 @@ function NewProducts() {
                     {product.isNew ? (<div className='saleper bg-dark'>NEW</div>) : (null)}
                   </div>
                   <div className='d-flex mt-2'>
-                  {Array.from({length: product.starCount},(_, index)=><img src="image/home/sale/starinactive.svg" alt="" key={index} />)}
+                  {Array.from({length: product.starCount},(_, index)=><img src="image/home/sale/star.svg" alt="" key={index} />)}
+                    {Array.from({length: 5 - product.starCount},(_, index)=><img src="image/home/sale/starinactive.svg" alt="" key={index} />)}
                     <p className='mb-0 fs-6'>({product.starPoint})</p>
                   </div>
                   <p className='mb-1 mt-1'>{product.brandName}</p>
