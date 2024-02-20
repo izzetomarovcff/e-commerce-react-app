@@ -78,7 +78,7 @@ function AddProduct() {
     }
     const handleAddProduct = async() =>{
         try {
-            await fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/products.json?auth=" + await authUser.getIdToken(),
+            await fetch(`${process.env.REACT_APP_FIREBASE_PRODUCT_URL}?auth=${await authUser.getIdToken()}`,
                 {
                     method: "POST",
                     headers: {

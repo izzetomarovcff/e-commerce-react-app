@@ -63,9 +63,9 @@ function SignUp() {
   //senda data to database
   const handleSignUp = async () =>{
     try{
-      await createUserWithEmailAndPassword(auth, formData.email, formData.password) // => response
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password)
       window.location.href = "/"
-      fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/users.json",
+      fetch(process.env.REACT_APP_FIREBASE_USERS_URL,
       {
         method: "POST",
         headers:{
@@ -74,7 +74,6 @@ function SignUp() {
         body: JSON.stringify(formData)
       })
       window.location.href = "/"
-      // console.log(response._tokenResponse.idToken)
     }catch(error){
       switch (error.code) {
         case 'auth/email-already-in-use':

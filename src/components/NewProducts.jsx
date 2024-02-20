@@ -5,7 +5,7 @@ function NewProducts() {
   useEffect(()=>{
     const getData = async () =>{
       try{
-        const response = await fetch("https://e-commerce-app-37874-default-rtdb.firebaseio.com/products.json")
+        const response = await fetch(process.env.REACT_APP_FIREBASE_PRODUCT_URL)
         let resData = await response.json()
         let arr = []
         for(const key in resData){

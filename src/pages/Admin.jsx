@@ -1,4 +1,4 @@
-import React, { useEffect, useState  } from 'react'
+import React, { useEffect  } from 'react'
 import Footernavbar from '../components/Footernavbar'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
