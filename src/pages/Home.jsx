@@ -7,6 +7,7 @@ import NewProducts from '../components/NewProducts'
 import HaveSaleProducts from '../components/HaveSaleProducts'
 function Home() {
   useEffect(() => {
+    console.log(process.env.REACT_APP_FIREBASE_AUTH_DOMAIN)
     const listen = onAuthStateChanged(auth, (user) => {
       // console.log(user.email) //check token status
       if (user) {

@@ -4,8 +4,8 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth"
 import { getStorage} from "firebase/storage"
 const firebaseConfig = {
-    apiKey: "AIzaSyD6HhaVEgy7ElONyzbj4s4WQo9yfZ9OnBk",
-    authDomain: "e-commerce-app-37874.firebaseapp.com",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
     databaseURL: "https://e-commerce-app-37874-default-rtdb.firebaseio.com",
     projectId: "e-commerce-app-37874",
     storageBucket: "e-commerce-app-37874.appspot.com",
