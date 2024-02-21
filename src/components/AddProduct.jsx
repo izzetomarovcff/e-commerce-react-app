@@ -78,7 +78,7 @@ function AddProduct() {
     }
     const handleAddProduct = async() =>{
         try {
-            await fetch(`${process.env.REACT_APP_FIREBASE_PRODUCT_URL}?auth=${await authUser.getIdToken()}`,
+            await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/products.json?auth=${await authUser.getIdToken()}`,
                 {
                     method: "POST",
                     headers: {

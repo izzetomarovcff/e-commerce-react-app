@@ -65,7 +65,7 @@ function SignUp() {
     try{
       await createUserWithEmailAndPassword(auth, formData.email, formData.password)
       window.location.href = "/"
-      fetch(process.env.REACT_APP_FIREBASE_USERS_URL,
+      fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/users.json`,
       {
         method: "POST",
         headers:{

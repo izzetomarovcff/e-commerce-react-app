@@ -5,7 +5,7 @@ function HaveSaleProducts() {
   useEffect(()=>{
     const getData = async () =>{
       try{
-        const response = await fetch(process.env.REACT_APP_FIREBASE_PRODUCT_URL)
+        const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/products.json`)
         let resData = await response.json()
         let arr = []
         for(const key in resData){
