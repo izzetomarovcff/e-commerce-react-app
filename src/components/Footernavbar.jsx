@@ -41,12 +41,13 @@ function Footernavbar() {
       case "/admin":
           setIconPath({...iconpath, home:"icons/home.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg",admin:"icons/profileactive.svg"})
           break;
+      case "/admin/":
       case "/admin/addproduct":
+      case "/admin/addcategory":
+      case "/admin/addcollection":
             setIconPath({...iconpath, home:"../icons/home.svg",shop:"../icons/shop.svg",cart:"../icons/cart.svg",favorites:"../icons/favorites.svg",profile:"../icons/profile.svg",admin:"../icons/profileactive.svg"})
             break;
-      case "/admin/addcategory":
-              setIconPath({...iconpath, home:"../icons/home.svg",shop:"../icons/shop.svg",cart:"../icons/cart.svg",favorites:"../icons/favorites.svg",profile:"../icons/profile.svg",admin:"../icons/profileactive.svg"})
-              break;
+      
       default:
         break;
     }

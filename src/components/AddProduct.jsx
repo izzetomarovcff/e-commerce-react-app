@@ -9,6 +9,7 @@ function AddProduct() {
     const [authUser, setAuthUser] = useState(null)
     const [error, setError] = useState(null)
     const [categoryes, setCategories] = useState(null)
+    const [collections, setCollections] = useState(null)
     const [productFormData, setProductFormData] = useState(
         {
             id: "",
@@ -23,7 +24,8 @@ function AddProduct() {
             oldPrice: "",
             price: "",
             favorite: false,
-            categoryId: ""
+            categoryId: "",
+            collectionId: ""
         }
     )
     useEffect(() => {
@@ -35,25 +37,39 @@ function AddProduct() {
                 window.location.href = "/login"
             }
         })
-        const getCategoryData = async () =>{
-            try{
-              const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/category.json`)
-              let resData = await response.json()
-              let arr = []
-              for(const key in resData){
-                  arr.push({...resData[key],id:key})
-              }
-              setCategories(arr)
-            }catch(error){
-              console.log(error)
+        const getCategoryData = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/category.json`)
+                let resData = await response.json()
+                let arr = []
+                for (const key in resData) {
+                    arr.push({ ...resData[key], id: key })
+                }
+                setCategories(arr)
+            } catch (error) {
+                console.log(error)
             }
-          }
-          getCategoryData()
+        }
+        const getCollectionData = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/collection.json`)
+                let resData = await response.json()
+                let arr = []
+                for (const key in resData) {
+                    arr.push({ ...resData[key], id: key })
+                }
+                setCollections(arr)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getCategoryData()
+        getCollectionData()
         return () => {
             listen()
         }
     }, [])
-    
+
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
         setProductFormData(prevState => ({
@@ -63,41 +79,41 @@ function AddProduct() {
         console.log(productFormData)
 
     }
-    function handleCheck (){
-        if(productFormData.brandName === ""){
+    function handleCheck() {
+        if (productFormData.brandName === "") {
             return "Enter The Brand Name!"
-            
-        }else if(productFormData.productName === ""){
+
+        } else if (productFormData.productName === "") {
             return "Enter The Product Name"
-        }else if(productFormData.price === "" || productFormData.price <= 0){
+        } else if (productFormData.price === "" || productFormData.price <= 0) {
             return "Price Can't Be Left Blank And Can't Be 0 ! (Min: 1)"
-        }else if(productFormData.starCount === "" || productFormData.starCount < 0 || productFormData.starCount> 5){
+        } else if (productFormData.starCount === "" || productFormData.starCount < 0 || productFormData.starCount > 5) {
             return "The Star Count Should Not Be Left Empty. (Min: 0, Max: 5) !"
-        }else if(productFormData.starPoint === "" || productFormData.starPoint < 0 || productFormData.starPoint> 10){
+        } else if (productFormData.starPoint === "" || productFormData.starPoint < 0 || productFormData.starPoint > 10) {
             return "The Star Point Should Not Be Left Empty. (Min: 0, Max: 10) !"
         }
-        else if(productFormData.imgUrl === "" ){
+        else if (productFormData.imgUrl === "") {
             return "Please upload Product Image!"
-        }else if(productFormData.categoryId === ""){
+        } else if (productFormData.categoryId === "") {
             return "Please Selecet Category"
-        }else if(productFormData.isSale){
-            if(productFormData.salePer === "" || productFormData.salePer <= 0 || productFormData.salePer > 100){
+        } else if (productFormData.isSale) {
+            if (productFormData.salePer === "" || productFormData.salePer <= 0 || productFormData.salePer > 100) {
                 return "Discount percentage Should Not Be Left Empty And Can't Be 0 ! (Min: 1, Max: 100)"
-            }else if(productFormData.oldPrice === "" || productFormData.oldPrice <= 0){
+            } else if (productFormData.oldPrice === "" || productFormData.oldPrice <= 0) {
                 return "Old Price Can't Be Left Blank And Can't Be 0 ! (Min: 0)"
-            }else{
+            } else {
                 handleAddProduct()
                 return null
             }
-        }else{
+        } else {
             handleAddProduct()
             return null
         }
 
-        
-        
+
+
     }
-    const handleAddProduct = async() =>{
+    const handleAddProduct = async () => {
         try {
             await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/products.json?auth=${await authUser.getIdToken()}`,
                 {
@@ -118,7 +134,7 @@ function AddProduct() {
         setTimeout(() => {
             setError(null)
         }, 1500);
-        
+
     }
     const handleImgUpload = async (e) => {
         const selectedFile = e.target.files[0]
@@ -135,7 +151,7 @@ function AddProduct() {
             }))
 
         } catch (error) {
-            switch(error.code){
+            switch (error.code) {
                 case "storage/unauthorized":
                     setError(`${selFile.name} Failed To Upload To Server!\nYou Don't Have Permission To Upload Image!`)
                     break;
@@ -165,40 +181,40 @@ function AddProduct() {
     }
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
-            
+
             <h1>Create Product</h1>
-            {error ? (<div className='alert alert-danger producterror mt-3 mb-3 w-75'>{error}</div>):(null)}
+            {error ? (<div className='alert alert-danger producterror mt-3 mb-3 w-75'>{error}</div>) : (null)}
             <div className="mb-3 w-100">
                 <label htmlFor="brandName" className="form-label">Brand Name</label>
                 <input type="text" name='brandName' className="form-control" id="brandName" value={productFormData.brandName} onChange={handleChange} autoComplete='off' placeholder='Product Beand Name' />
             </div>
             <div className="mb-3 w-100">
                 <label htmlFor="productName" className="form-label">Product Name</label>
-                <input type="text" name='productName' className="form-control" id="productName" value={productFormData.productName} onChange={handleChange} autoComplete='off' placeholder='Product Name'  />
+                <input type="text" name='productName' className="form-control" id="productName" value={productFormData.productName} onChange={handleChange} autoComplete='off' placeholder='Product Name' />
             </div>
             {productFormData.isSale ? (
                 <div className="mb-3 w-100">
                     <label htmlFor="salePer" className="form-label">Discount percentage</label>
-                    <input type="number" name='salePer' className="form-control" id="salePer" value={productFormData.salePer} onChange={handleChange} autoComplete='off' placeholder='Product Discount Percentage'  />
+                    <input type="number" name='salePer' className="form-control" id="salePer" value={productFormData.salePer} onChange={handleChange} autoComplete='off' placeholder='Product Discount Percentage' />
                 </div>
             ) : (null)}
             {productFormData.isSale ? (
                 <div className="mb-3 w-100">
                     <label htmlFor="oldPrice" className="form-label">Old Price</label>
-                    <input type="number" name='oldPrice' className="form-control" id="oldPrice" value={productFormData.oldPrice} onChange={handleChange} autoComplete='off' placeholder='Before Discount Price'  />
+                    <input type="number" name='oldPrice' className="form-control" id="oldPrice" value={productFormData.oldPrice} onChange={handleChange} autoComplete='off' placeholder='Before Discount Price' />
                 </div>
             ) : (null)}
             <div className="mb-3 w-100">
                 <label htmlFor="price" className="form-label">Price</label>
-                <input type="number" name='price' className="form-control" id="price" value={productFormData.price} onChange={handleChange} autoComplete='off' placeholder={productFormData.isSale ? ("After Discount Price") : ("Product Price")}  />
+                <input type="number" name='price' className="form-control" id="price" value={productFormData.price} onChange={handleChange} autoComplete='off' placeholder={productFormData.isSale ? ("After Discount Price") : ("Product Price")} />
             </div>
             <div className="mb-3 w-100">
                 <label htmlFor="starCount" className="form-label">Star Count</label>
-                <input type="number" name='starCount' className="form-control" id="starCount" value={productFormData.starCount} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-5'  />
+                <input type="number" name='starCount' className="form-control" id="starCount" value={productFormData.starCount} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-5' />
             </div>
             <div className="mb-3 w-100">
                 <label htmlFor="starPoint" className="form-label">Star Point</label>
-                <input type="number" name='starPoint' className="form-control" id="starPoint" value={productFormData.starPoint} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-10'  />
+                <input type="number" name='starPoint' className="form-control" id="starPoint" value={productFormData.starPoint} onChange={handleChange} autoComplete='off' placeholder='Min-0, Max-10' />
             </div>
             <div className="mb-3 w-100">
                 {productFormData.imgUrl === "" ? (<label htmlFor="img" className="form-label">Upload Image</label>) : (null)}
@@ -218,9 +234,20 @@ function AddProduct() {
                 <label htmlFor="categoryId" className="form-label">Select Category</label>
                 <select className='form-control' id='categoryId' name='categoryId' value={productFormData.categoryId} onChange={handleChange}>
                     <option value="">Selecet Category</option>
-                    {categoryes  == null ? (null):(
-                        categoryes.map((category,categorykey)=>{
-                            return(<option value={category.id} key={categorykey}>{category.categoryName}</option>)
+                    {categoryes == null ? (null) : (
+                        categoryes.map((category, categorykey) => {
+                            return (<option value={category.id} key={categorykey}>{category.categoryName}</option>)
+                        })
+                    )}
+                </select>
+            </div>
+            <div className="mb-3 w-100">
+                <label htmlFor="collectionId" className="form-label">Select Collection</label>
+                <select className='form-control' id='collectionId' name='collectionId' value={productFormData.collectionId} onChange={handleChange}>
+                    <option value="">Selecet Collection</option>
+                    {collections == null ? (null) : (
+                        collections.map((collection, collectionkey) => {
+                            return (<option value={collection.id} key={collectionkey}>{collection.collectionName}</option>)
                         })
                     )}
                 </select>
