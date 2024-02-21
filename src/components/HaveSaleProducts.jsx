@@ -10,7 +10,7 @@ function HaveSaleProducts() {
         let arr = []
         for(const key in resData){
           if(resData[key].isSale){
-            arr.unshift(resData[key])
+            arr.unshift({...resData[key], id:key})
           }
         }
         setProductData(arr)

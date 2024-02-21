@@ -4,6 +4,7 @@ import { auth, imageDb } from '../firebase'
 import { Link } from 'react-router-dom'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { v4 } from 'uuid'
+
 function AddProduct() {
     const [authUser, setAuthUser] = useState(null)
     const [error, setError] = useState(null)
@@ -42,7 +43,6 @@ function AddProduct() {
             ...prevState,
             [name]: (name === "salePer" || name === "salePer" || name === "oldPrice" || name === "price" || name === "starPoint" || name === "starCount") ? (Number(value)) : (name === "isNew" || name === "isSale" ? (checked) : (value))
         }))
-        console.log(productFormData)
     }
     function handleCheck (){
         if(productFormData.brandName === ""){
@@ -101,8 +101,6 @@ function AddProduct() {
     }
     const handleImgUpload = async (e) => {
         const selectedFile = e.target.files[0]
-
-
         requestDataBase(selectedFile)
     }
     const requestDataBase = async (selFile) => {
