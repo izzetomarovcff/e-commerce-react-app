@@ -8,6 +8,7 @@ import { v4 } from 'uuid'
 function AddProduct() {
     const [authUser, setAuthUser] = useState(null)
     const [error, setError] = useState(null)
+    const [categoryes, setCategories] = useState(null)
     const [productFormData, setProductFormData] = useState(
         {
             id: "",
@@ -21,7 +22,8 @@ function AddProduct() {
             productName: "",
             oldPrice: "",
             price: "",
-            favorite: false
+            favorite: false,
+            categoryId: ""
         }
     )
     useEffect(() => {
@@ -33,16 +35,33 @@ function AddProduct() {
                 window.location.href = "/login"
             }
         })
+        const getCategoryData = async () =>{
+            try{
+              const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/category.json`)
+              let resData = await response.json()
+              let arr = []
+              for(const key in resData){
+                  arr.push({...resData[key],id:key})
+              }
+              setCategories(arr)
+            }catch(error){
+              console.log(error)
+            }
+          }
+          getCategoryData()
         return () => {
             listen()
         }
     }, [])
+    
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
         setProductFormData(prevState => ({
             ...prevState,
             [name]: (name === "salePer" || name === "salePer" || name === "oldPrice" || name === "price" || name === "starPoint" || name === "starCount") ? (Number(value)) : (name === "isNew" || name === "isSale" ? (checked) : (value))
         }))
+        console.log(productFormData)
+
     }
     function handleCheck (){
         if(productFormData.brandName === ""){
@@ -59,6 +78,8 @@ function AddProduct() {
         }
         else if(productFormData.imgUrl === "" ){
             return "Please upload Product Image!"
+        }else if(productFormData.categoryId === ""){
+            return "Please Selecet Category"
         }else if(productFormData.isSale){
             if(productFormData.salePer === "" || productFormData.salePer <= 0 || productFormData.salePer > 100){
                 return "Discount percentage Should Not Be Left Empty And Can't Be 0 ! (Min: 1, Max: 100)"
@@ -192,6 +213,17 @@ function AddProduct() {
                         <img src="../icons/close.svg" alt="" />
                     </div>
                 </div>)}
+            </div>
+            <div className="mb-3 w-100">
+                <label htmlFor="categoryId" className="form-label">Select Category</label>
+                <select className='form-control' id='categoryId' name='categoryId' value={productFormData.categoryId} onChange={handleChange}>
+                    <option value="">Selecet Category</option>
+                    {categoryes  == null ? (null):(
+                        categoryes.map((category,categorykey)=>{
+                            return(<option value={category.id} key={categorykey}>{category.categoryName}</option>)
+                        })
+                    )}
+                </select>
             </div>
             {productFormData.isNew ? (null) : (
                 <div className="mb-3 w-100">
