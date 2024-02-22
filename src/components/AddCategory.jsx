@@ -9,7 +9,8 @@ function AddCategory() {
     const [categoryFormData, setCategoryFormData] = useState(
         {
             id: "",
-            categoryName: ""
+            categoryName: "",
+            categoryFor: ""
         }
     )
     useEffect(() => {
@@ -31,12 +32,15 @@ function AddCategory() {
             ...prevState,
             [name]: value
         }))
+        console.log(categoryFormData)
     }
 
     function handleCheck() {
         if(categoryFormData.categoryName === ""){
-            return "Enter The Category Name"
-        }else{
+            return "Enter The Category Name!"
+        }else if(categoryFormData.categoryFor === ""){
+            return "Please Selecet Category For!"
+        }{
             handleAddCategory()
             return null
         }
@@ -72,6 +76,15 @@ function AddCategory() {
             <div className="mb-3 w-100">
                 <label htmlFor="categoryName" className="form-label">Category Name</label>
                 <input type="text" name='categoryName' className="form-control" id="categoryName" value={categoryFormData.categoryName} onChange={handleChange} autoComplete='off' placeholder='Category Name' />
+            </div>
+            <div className="mb-3 w-100">
+                <label htmlFor="categoryFor" className="form-label">Category For</label>
+                <select className='form-control' id='categoryFor' name='categoryFor' value={categoryFormData.categoryFor} onChange={handleChange}>
+                    <option value="">Selecet</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="kids">Kids</option>
+                </select>
             </div>
             <button className='btn btn-primary w-100'>Add Category</button>
             <Link to="/admin" className='btn btn-outline-primary w-100 mt-3'>Cancel</Link>

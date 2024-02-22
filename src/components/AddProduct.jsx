@@ -25,7 +25,8 @@ function AddProduct() {
             price: "",
             favorite: false,
             categoryId: "",
-            collectionId: ""
+            collectionId: "",
+            productFor: ""
         }
     )
     useEffect(() => {
@@ -37,38 +38,50 @@ function AddProduct() {
                 window.location.href = "/login"
             }
         })
+
+
+        return () => {
+            listen()
+        }
+    }, [])
+
+    useEffect(() => {
         const getCategoryData = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/category.json`)
                 let resData = await response.json()
                 let arr = []
                 for (const key in resData) {
-                    arr.push({ ...resData[key], id: key })
+                    if (resData[key].categoryFor === productFormData.productFor) {
+                        arr.push({ ...resData[key], id: key })
+                    }
+
                 }
                 setCategories(arr)
             } catch (error) {
                 console.log(error)
             }
-        }
-        const getCollectionData = async () => {
-            try {
-                const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/collection.json`)
-                let resData = await response.json()
-                let arr = []
-                for (const key in resData) {
-                    arr.push({ ...resData[key], id: key })
+            const getCollectionData = async () => {
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/collection.json`)
+                    let resData = await response.json()
+                    let arr = []
+                    for (const key in resData) {
+                        if(resData[key].collectionFor === productFormData.productFor){
+                            arr.push({ ...resData[key], id: key })
+                        }
+                        
+                    }
+                    setCollections(arr)
+                } catch (error) {
+                    console.log(error)
                 }
-                setCollections(arr)
-            } catch (error) {
-                console.log(error)
             }
+
+            getCollectionData()
         }
         getCategoryData()
-        getCollectionData()
-        return () => {
-            listen()
-        }
-    }, [])
+    }, [productFormData.productFor])
 
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
@@ -95,7 +108,9 @@ function AddProduct() {
         else if (productFormData.imgUrl === "") {
             return "Please upload Product Image!"
         } else if (productFormData.categoryId === "") {
-            return "Please Selecet Category"
+            return "Please Selecet Category!"
+        } else if (productFormData.productFor === "") {
+            return "Please Selecet Product For!"
         } else if (productFormData.isSale) {
             if (productFormData.salePer === "" || productFormData.salePer <= 0 || productFormData.salePer > 100) {
                 return "Discount percentage Should Not Be Left Empty And Can't Be 0 ! (Min: 1, Max: 100)"
@@ -219,7 +234,7 @@ function AddProduct() {
             <div className="mb-3 w-100">
                 {productFormData.imgUrl === "" ? (<label htmlFor="img" className="form-label">Upload Image</label>) : (null)}
                 {productFormData.imgUrl === "" ? (<div className='d-flex justify-content-between'>
-                    <input type="file" name='img' className="form-control w-100" id="imgUrl" onChange={handleImgUpload} />
+                    <input type="file" name='img' className="form-control w-100" id="img" onChange={handleImgUpload} />
                 </div>) : (null)}
 
                 {productFormData.imgUrl === "" ? (null) : (<div className='uploadedimg w-100 mt-3 rounded border shadow-sm'>
@@ -230,6 +245,17 @@ function AddProduct() {
                     </div>
                 </div>)}
             </div>
+            <div className="mb-3 w-100">
+                <label htmlFor="productFor" className="form-label">Product For</label>
+                <select className='form-control' id='productFor' name='productFor' value={productFormData.productFor} onChange={handleChange}>
+                    <option value="">Selecet</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="kids">Kids</option>
+
+                </select>
+            </div>
+
             <div className="mb-3 w-100">
                 <label htmlFor="categoryId" className="form-label">Select Category</label>
                 <select className='form-control' id='categoryId' name='categoryId' value={productFormData.categoryId} onChange={handleChange}>
