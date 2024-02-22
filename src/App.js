@@ -8,9 +8,6 @@ import Cart from './pages/Cart';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
-import PageNotFound from './pages/PageNotFound';
-
-
 function App() {
 
   return (
