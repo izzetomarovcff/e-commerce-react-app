@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom'
 import WomenCollection from '../components/WomenCollection'
 import MenCollection from '../components/MenCollection'
 import KidsCollection from '../components/KidsCollection'
+import CollectionProduct from '../components/CollectionProduct'
 
 function Shop() {
   const [forClass, setForClass] = useState({
@@ -65,8 +66,14 @@ function Shop() {
       </div>
       <Routes>
         <Route path='/women' element={<WomenCollection/>}/>
+        <Route path='/women/*' element={<CollectionProduct/>}/>
+        
         <Route path='/men' element={<MenCollection/>}/>
+        <Route path='/men/*' element={<CollectionProduct/>}/>
+
         <Route path='/kids' element={<KidsCollection/>}/>
+        <Route path='/kids/*' element={<CollectionProduct/>}/>
+
       </Routes>
         
         <Footernavbar/>

@@ -331,7 +331,25 @@ a{
             text-align: center;
         }
     }
-    
+    .collectionproducts{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .collectionname{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: $secondary;
+            padding: 10px 0px;
+            font-size: 15px;
+            color: $dark;
+            letter-spacing: 2px;
+        }
+
+    }
     
 
 }
