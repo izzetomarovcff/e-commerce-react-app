@@ -272,12 +272,13 @@ a{
         display: flex;
         justify-content: center;
         align-items: center;
-        background: transparent;
         h1{
             font-weight: 600;
         }   
     }
     .selecetfor{
+        
+        backdrop-filter: blur(10px);
         position: sticky;
         top:0;
         display: flex;
@@ -286,7 +287,8 @@ a{
         height: 49px;
         align-items: center;
         justify-content: space-around;
-        background-color: $secondary;
+        
+        
         padding-bottom: 5px;
         .elementsfor{
             display: flex;
