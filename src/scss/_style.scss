@@ -256,6 +256,77 @@ a{
         }
     }
 }
+.shoppage{
+    width: 100vw;
+    height: 7000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 61px;
+    .headerbox{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        h1{
+            font-weight: 600;
+        }   
+    }
+    .selecetfor{
+        position: sticky;
+        top:0;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 49px;
+        align-items: center;
+        justify-content: space-around;
+        background-color: $secondary;
+        padding-bottom: 5px;
+        .elementsfor{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 33%;
+            height: 44px;
+            color: $dark;
+            cursor: pointer;
+            
+        }
+        .activelementsfor{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 33%;
+            height: 44px;
+            border-bottom: 2px solid $primary;
+            color: $dark;
+            cursor: pointer;
+            
+        }
+    }
+    .collections{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .collection{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $primary;
+            width: 90%;
+            color: #fff;
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+    
+    
+
+}
 
 .admin{
     width: 100vw;

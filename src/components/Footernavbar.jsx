@@ -45,9 +45,15 @@ function Footernavbar() {
       case "/admin/addproduct":
       case "/admin/addcategory":
       case "/admin/addcollection":
-            setIconPath({...iconpath, home:"../icons/home.svg",shop:"../icons/shop.svg",cart:"../icons/cart.svg",favorites:"../icons/favorites.svg",profile:"../icons/profile.svg",admin:"../icons/profileactive.svg"})
-            break;
-      
+          setIconPath({...iconpath, home:"../icons/home.svg",shop:"../icons/shop.svg",cart:"../icons/cart.svg",favorites:"../icons/favorites.svg",profile:"../icons/profile.svg",admin:"../icons/profileactive.svg"})
+          break;
+      case "/shop/":
+      case "/shop/women":
+      case "/shop/men":
+      case "/shop/kids":
+
+        setIconPath({...iconpath, home:"../icons/home.svg",shop:"../icons/shopactive.svg",cart:"../icons/cart.svg",favorites:"../icons/favorites.svg",profile:"../icons/profile.svg",admin:"../icons/profile.svg"})
+
       default:
         break;
     }
@@ -61,7 +67,7 @@ function Footernavbar() {
         window.location.pathname="/"
         break;
       case "shop":
-        window.location.pathname="/shop"
+        window.location.pathname="/shop/women"
         break;
       case "cart":
         window.location.pathname="/cart"
