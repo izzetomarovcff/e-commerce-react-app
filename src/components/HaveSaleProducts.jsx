@@ -21,6 +21,7 @@ function HaveSaleProducts() {
     getData()
     
   },[])
+  
   return (
     <div id='salesection' className='pt-5'>
         
@@ -33,8 +34,8 @@ function HaveSaleProducts() {
                 <div className="product mx-3" key={keyproduct} >
                   <div className='productimg'>
                     <img src={product.imgUrl} alt="product" />
-                    {product.isSale ? (<div className='saleper bg-primary'>-{product.salePer}%</div>) : (null)}
-                    {product.isNew ? (<div className='saleper bg-dark'>new</div>) : (null)}
+                    {product.isSale ? (<div className='sale bg-primary'>-{product.salePer}%</div>) : (null)}
+                    {product.isNew ? (<div className='new bg-dark'>new</div>) : (null)}
                   </div>
                   <div className='d-flex mt-2'>
                     {Array.from({length: product.starCount},(_, index)=><img src="image/home/sale/star.svg" alt="" key={index} />)}

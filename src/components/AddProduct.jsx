@@ -95,7 +95,6 @@ function AddProduct() {
     function handleCheck() {
         if (productFormData.brandName === "") {
             return "Enter The Brand Name!"
-
         } else if (productFormData.productName === "") {
             return "Enter The Product Name"
         } else if (productFormData.price === "" || productFormData.price <= 0) {
@@ -104,13 +103,12 @@ function AddProduct() {
             return "The Star Count Should Not Be Left Empty. (Min: 0, Max: 5) !"
         } else if (productFormData.starPoint === "" || productFormData.starPoint < 0 || productFormData.starPoint > 10) {
             return "The Star Point Should Not Be Left Empty. (Min: 0, Max: 10) !"
-        }
-        else if (productFormData.imgUrl === "") {
+        } else if (productFormData.imgUrl === "") {
             return "Please upload Product Image!"
+        } else if (productFormData.productFor === "" ) {
+            return "Please Selecet Product For!"
         } else if (productFormData.categoryId === "") {
             return "Please Selecet Category!"
-        } else if (productFormData.productFor === "") {
-            return "Please Selecet Product For!"
         } else if (productFormData.isSale) {
             if (productFormData.salePer === "" || productFormData.salePer <= 0 || productFormData.salePer > 100) {
                 return "Discount percentage Should Not Be Left Empty And Can't Be 0 ! (Min: 1, Max: 100)"
@@ -148,7 +146,7 @@ function AddProduct() {
         setError(handleCheck())
         setTimeout(() => {
             setError(null)
-        }, 1500);
+        }, 2500);
 
     }
     const handleImgUpload = async (e) => {
@@ -198,7 +196,7 @@ function AddProduct() {
         <form onSubmit={handleSubmit} className='pt-3'>
 
             <h1>Create Product</h1>
-            {error ? (<div className='alert alert-danger producterror mt-3 mb-3 w-75'>{error}</div>) : (null)}
+            {error ? (<div className='alert alert-danger error mt-3 mb-3 w-75'>{error}</div>) : (null)}
             <div className="mb-3 w-100">
                 <label htmlFor="brandName" className="form-label">Brand Name</label>
                 <input type="text" name='brandName' className="form-control" id="brandName" value={productFormData.brandName} onChange={handleChange} autoComplete='off' placeholder='Product Beand Name' />

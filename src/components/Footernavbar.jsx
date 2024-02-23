@@ -101,7 +101,7 @@ function Footernavbar() {
         <img src={iconpath.profile} alt="" />
         <p>Profile</p>
       </div>
-      {authUser ? (authUser.email === "izzetomarovcff@gmail.com"?(
+      {authUser ? (authUser.email === process.env.REACT_APP_FIREBASE_ADMIN_EMAIL ?(
         <div className='navitem' onClick={()=>handleClick("admin")}>
         <img src={iconpath.admin} alt="" />
         <p>Admin</p>

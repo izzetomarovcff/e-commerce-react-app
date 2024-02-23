@@ -22,18 +22,18 @@ function NewProducts() {
     
   },[])
   return (
-    <div id='salesection' className='pt-5'>
+    <div id='newsection' className='pt-5'>
         <h1 className='px-3'>New</h1>
         <p className='px-3'>You've never seen it before!</p>
         {productdata.length == 0 ? (<div className='mx-auto text-dark'>Not Have New Product</div>):(
-            <div className='saleproduct '>
+            <div className='newproduct'>
             {productdata.filter(product => product.isNew).map((product, keyproduct) => {
               return (
                 <div className="product mx-3" key={keyproduct} >
                   <div className='productimg'>
                     <img src={product.imgUrl} alt="product" />
-                    {product.isSale ? (<div className='saleper bg-primary'>-{product.salePer}%</div>) : (null)}
-                    {product.isNew ? (<div className='saleper bg-dark'>NEW</div>) : (null)}
+                    {product.isSale ? (<div className='sale bg-primary'>-{product.salePer}%</div>) : (null)}
+                    {product.isNew ? (<div className='new bg-dark'>NEW</div>) : (null)}
                   </div>
                   <div className='d-flex mt-2'>
                   {Array.from({length: product.starCount},(_, index)=><img src="image/home/sale/star.svg" alt="" key={index} />)}

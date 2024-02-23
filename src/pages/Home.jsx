@@ -18,7 +18,8 @@ function Home() {
       listen()
     }
   }, [])
-  
+
+
   return (
     <div className='homepage'>
       <div className='checksale'>
@@ -27,9 +28,9 @@ function Home() {
           <a href='#salesection' className='btn btn-primary px-5'>Check</a>
         </div>
       </div>
-      <HaveSaleProducts/>
-      <NewProducts/>
-      
+      <HaveSaleProducts />
+      <NewProducts />
+
       <Link to={"/shop"} className='mt-5'>
         <div className='catalog'>
           <div className='catalogtext'>New Collection</div>

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+//global
 *{
     margin: 0;
     padding: 0;
@@ -6,62 +7,24 @@
     font-family: "Montserrat", sans-serif;
 }
 body{
+    background-color: $secondary;
     overflow-x: hidden;
+}
+a{
+    text-decoration: none;
+}
+.error{
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 100%;
+    z-index: 100;
 }
 ::-webkit-scrollbar {
     width: 0px;
     height: 0px;
-  }
-button{
-    border-radius: 25px!important;
 }
-.btn-outline-primary{
-    border-radius: 25px!important;
-}
-body{
-    background-color: $secondary;
-}
-.signup{
-    width: 85%;
-    min-height: 100vh;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.signup h1{
-    font-weight: 700;
-}
-// gozat
-.signup form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.homepage{
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 61px;
-}
-.loading-overlay{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    
-    opacity: 100%;
-}
-.loading-overlay .spinner-border{
-    width: 100px;
-    height: 100px;
-}
+//navbar
 .footernavbar{
     position: fixed;
     bottom: 0;
@@ -73,239 +36,259 @@ body{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    .navitem{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #9B9B9B;
+        margin: 0;
+        padding: 0;
+        font-size: 10px;
+        font-weight: 500;
+        img{
+            width: 30px;
+            height: 30px;
+        }
+        p{
+            padding: 0;
+            margin: 0;
+        }
+    }
 }
-.navitem{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.navitem img{
-    width: 30px;
-    height: 30px;
-}
-
-.navitem{
-    color: #9B9B9B;
-    margin: 0;
-    padding: 0;
-    font-size: 10px;
-    font-weight: 500;
-}
-.navitem p{
-    padding: 0;
-    margin: 0;
-}
-.checksale{
-    width: 100vw;
-    height: 536px;
-    background-image: url(../../public/image/home/checksale.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 0 0 15px 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-.checksale img{
-    width: 100%;
-}
-.checkgroup{
-    margin: 35px 20px;
-}
-.checkgroup a{
-    border-radius: 25px!important;
-}
-.checkgroup h1{
-    color: #fff;
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: 3px;
-}
-#salesection{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-#salesection h1{
-    font-weight: 700;
-    font-size: 35px;
-}
-#salesection p{
-    color: #9B9B9B;
-}
-.saleproduct{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    overflow-x: scroll;
-}
-.saleproduct .product{
+//component
+.product{
     display: flex;
     flex-direction: column;
     position: relative;
-}
-.saleproduct .product .productimg{
-    position: relative;
-    width: 148px;
-    height: 184px;
+    .productimg{
+        position: relative;
+        width: 148px;
+        height: 184px;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .sale, .new{
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: min-content;
+            padding: 5px 10px;
+            font-size: 10px;
+            border-radius: 20px!important;
+            color: #fff;
+            font-weight: 500;
+        }
+    }
+    .newprice{
+        font-weight: 500;
+    }
+    del{
+        color: #9B9B9B;
+    }
+    .addfav{
+        background-color: #fff;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: min-content;
+        right: 7px;
+        top: 167px;
+        border-radius: 50%;
+        padding: 5px;
+    }
 
 }
-.saleproduct .product .productimg img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+
+
+//pages
+.signup, .login{
+    width: 85%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .loading-overlay{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        opacity: 100%;
+        .spinner-border{
+            width: 100px;
+            height: 100px;
+        }
+    }
+    h1{
+    font-weight: 700;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
+.homepage{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 61px;
+    .checksale{
+        width: 100vw;
+        height: 536px;
+        background-image: url(../../public/image/home/checksale.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 0 0 15px 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        .checkgroup{
+            margin: 35px 20px;
+            h1{
+                color: #fff;
+                font-size: 40px;
+                font-weight: 700;
+                letter-spacing: 3px;
+            }
+        }
+    }
+    #salesection, #newsection{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        h1{
+            font-weight: 700;
+            font-size: 35px;
+        }
+        p{
+            color: #9B9B9B;
+        }
+        .saleproduct, .newproduct{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            overflow-x: scroll;
+        }
+    }
+    .catalog{
+        width: 100vw;
+        height: 366px;
+        background-image: url(../../public/image/home/catalog//newcollection.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: end;
+        .catalogtext{
+            margin: 10px 20px;
+            color: #fff;
+            font-size: 30px;
+            font-weight: 700;
+        }
+    }
+    .othercatalog{
+        width: 100vw;
+        height: 374px;
+        display: flex;
+        flex-direction: row;
+    }
+    .othercatalog1{
+        width: 50vw;
+        height: 374px;
+        display: flex;
+        flex-direction: column;
+        .othercatalog11{
+            width: 50vw;
+            height: 187px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .othercatalog11text{
+                color: $primary;
+                font-size: 25px;
+                font-weight: 700;
+            }
+        }
+        .othercatalog12{
+            width: 50vw;
+            height: 187px;
+            background-image: url(../../public/image/home/catalog/black.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: start;
+            .othercatalog12text{
+                color: #fff;
+                font-size: 25px;
+                font-weight: 700;
+                margin: 0 0 40px 20px;
+            }
+        }
+    }
+    .othercatalog2{
+        width: 50vw;
+        height: 374px;
+        background-image: url(../../public/image/home/catalog/mens.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .catalog2text{
+            color: #fff;
+            font-size: 30px;
+            font-weight: 700;
+        }
+    }
 }
 
-.saleproduct .product .productimg .saleper{
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    width: min-content;
-    padding: 5px 10px;
-    font-size: 10px;
-    border-radius: 20px!important;
-    color: #fff;
-    font-weight: 500;
-}
-del{
-    color: #9B9B9B;
-}
-.product .newprice{
-    font-weight: 500;
-}
-.saleproduct .product .addfav{
-    background-color: #fff;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: min-content;
-    right: 7px;
-    top: 167px;
-    border-radius: 50%;
-    padding: 5px;
-}
-.catalog{
-    width: 100vw;
-    height: 366px;
-    background-image: url(../../public/image/home/catalog//newcollection.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: end;
-}
-.catalogtext{
-    margin: 10px 20px;
-    color: #fff;
-    font-size: 30px;
-    font-weight: 700;
-}
-.othercatalog{
-    width: 100vw;
-    height: 374px;
-    display: flex;
-    flex-direction: row;
-}
-.othercatalog1, .othercatalog2{
-    width: 50vw;
-    height: 374px;
-}
-.othercatalog1{
-    display: flex;
-    flex-direction: column;
-}
-.othercatalog11{
-    width: 50vw;
-    height: 187px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.othercatalog11text{
-    color: $primary;
-    font-size: 25px;
-    font-weight: 700;
-}
-.othercatalog12{
-    width: 50vw;
-    height: 187px;
-    background-image: url(../../public/image/home/catalog/black.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: start;
-}
-.othercatalog12text{
-    color: #fff;
-    font-size: 25px;
-    font-weight: 700;
-    margin: 0 0 40px 20px;
-}
-.othercatalog2{
-    background-image: url(../../public/image/home/catalog/mens.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.catalog2text{
-    color: #fff;
-    font-size: 30px;
-    font-weight: 700;
-}
-a{
-    text-decoration: none;
-}
 .admin{
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.admin form{
-    position: absolute;
-    top: 0px;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    padding-bottom: 80px;
-    align-items: center;    
-    background-color: $secondary;
-}
-.uploadedimg{
-    height: 200px;
-    position: relative;
-}
-.uploadedimg img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.removeuploadedfile{
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background-color: $secondary;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-}
-.removeuploadedfile img{
-    color: #fff;
-}
-.producterror{
-    position: fixed;
-    top: 0;
-    margin: auto;
-    width: 100%;
+    form{
+        position: absolute;
+        top: 0px;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        padding-bottom: 80px;
+        align-items: center;    
+        background-color: $secondary;
+        .uploadedimg{
+            height: 200px;
+            position: relative;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .removeuploadedfile{
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background-color: $secondary;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+            }
+        }
+    }
 }

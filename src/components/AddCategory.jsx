@@ -72,7 +72,7 @@ function AddCategory() {
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
             <h1>Create Product</h1>
-            {error ? (<div className='alert alert-danger producterror mt-3 mb-3 w-75'>{error}</div>) : (null)}
+            {error ? (<div className='alert alert-danger error mt-3 mb-3 w-75'>{error}</div>) : (null)}
             <div className="mb-3 w-100">
                 <label htmlFor="categoryName" className="form-label">Category Name</label>
                 <input type="text" name='categoryName' className="form-control" id="categoryName" value={categoryFormData.categoryName} onChange={handleChange} autoComplete='off' placeholder='Category Name' />

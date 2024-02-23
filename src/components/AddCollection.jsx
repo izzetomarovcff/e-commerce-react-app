@@ -118,7 +118,7 @@ function AddCollection() {
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
             <h1>Create Product</h1>
-            {error ? (<div className='alert alert-danger producterror mt-3 mb-3 w-75'>{error}</div>) : (null)}
+            {error ? (<div className='alert alert-danger error mt-3 mb-3 w-75'>{error}</div>) : (null)}
             <div className="mb-3 w-100">
                 <label htmlFor="collectionName" className="form-label">Collection Name</label>
                 <input type="text" name='collectionName' className="form-control" id="collectionName" value={collectionFormData.collectionName} onChange={handleChange} autoComplete='off' placeholder='Collection Name' />

@@ -62,7 +62,7 @@ function LogIn() {
     handleLogIn()
   }
   return (
-    <div className='signup'>
+    <div className='login'>
       {loading?(
         <div className='loading-overlay bg-secondary'>
           <div className="spinner-border text-primary border-5" role="status">
