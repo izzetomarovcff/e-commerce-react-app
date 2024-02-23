@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function Women() {
+function MenCollection() {
     const [collectionData, setCollectionData] = useState([])
-
     useEffect(() => {
         const getData = async () => {
             try {
@@ -10,7 +10,7 @@ function Women() {
                 let resData = await response.json()
                 let arr = []
                 for (const key in resData) {
-                    if (resData[key].collectionFor === "women") {
+                    if (resData[key].collectionFor === "men") {
                         arr.push({ ...resData[key], id: key })
                     }
                 }
@@ -25,11 +25,11 @@ function Women() {
         <div className='collections'>
             {collectionData.length == 0 ? (null):(
                 collectionData.map((collection, collectionkey)=>{
-                    return(<div className='collection mt-3 rounded pt-4 pb-4'>{collection.collectionName}</div>)
+                    return(<Link key={collectionkey} to={`/shop/men/${collection.id}`} className='collection mt-3 rounded pt-4 pb-4'>{collection.collectionName}</Link>)
                 })
             )}
         </div>
     )
 }
 
-export default Women
+export default MenCollection

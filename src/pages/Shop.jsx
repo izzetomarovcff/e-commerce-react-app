@@ -3,9 +3,9 @@ import Footernavbar from '../components/Footernavbar'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
 import { Routes, Route } from 'react-router-dom'
-import Women from '../components/Women'
-import Men from '../components/Men'
-import Kids from '../components/Kids'
+import WomenCollection from '../components/WomenCollection'
+import MenCollection from '../components/MenCollection'
+import KidsCollection from '../components/KidsCollection'
 
 function Shop() {
   const [forClass, setForClass] = useState({
@@ -64,9 +64,9 @@ function Shop() {
         <div  className={forClass.kids} onClick={()=>handleClick("kids")}>Kids</div>
       </div>
       <Routes>
-        <Route path='/women' element={<Women/>}/>
-        <Route path='/men' element={<Men/>}/>
-        <Route path='/kids' element={<Kids/>}/>
+        <Route path='/women' element={<WomenCollection/>}/>
+        <Route path='/men' element={<MenCollection/>}/>
+        <Route path='/kids' element={<KidsCollection/>}/>
       </Routes>
         
         <Footernavbar/>

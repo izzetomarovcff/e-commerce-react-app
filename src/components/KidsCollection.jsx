@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function Kids() {
+function KidsCollection() {
     const [collectionData, setCollectionData] = useState([])
     useEffect(() => {
         const getData = async () => {
@@ -24,11 +25,11 @@ function Kids() {
         <div className='collections'>
             {collectionData.length == 0 ? (null) : (
                 collectionData.map((collection, collectionkey) => {
-                    return (<div className='collection mt-3 rounded pt-4 pb-4'>{collection.collectionName}</div>)
+                    return (<Link key={collectionkey} to={`/shop/kids/${collection.id}`} className='collection mt-3 rounded pt-4 pb-4'>{collection.collectionName}</Link>)
                 })
             )}
         </div>
     )
 }
 
-export default Kids
+export default KidsCollection
