@@ -58,7 +58,7 @@ function Shop() {
       <div className='headerbox rounded w-100'>
         <h1>Categories</h1>
       </div>
-      <div className='selecetfor shadow bg-opacity-50 bg-secondary'>
+      <div className='selecetfor  bg-secondary'>
         <div  className={forClass.women} onClick={()=>handleClick("women")}>Women</div>
         <div  className={forClass.men} onClick={()=>handleClick("men")}>Men</div>
         <div  className={forClass.kids} onClick={()=>handleClick("kids")}>Kids</div>

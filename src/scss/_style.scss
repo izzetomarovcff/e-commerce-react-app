@@ -277,7 +277,7 @@ a{
         }   
     }
     .selecetfor{
-        
+        --bs-bg-opacity: .7;
         backdrop-filter: blur(10px);
         position: sticky;
         top:0;
@@ -309,6 +309,8 @@ a{
             border-bottom: 2px solid $primary;
             color: $dark;
             cursor: pointer;
+            font-weight: 600;
+            color: $primary;
             
         }
     }
