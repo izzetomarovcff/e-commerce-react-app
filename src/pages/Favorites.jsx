@@ -3,7 +3,9 @@ import Footernavbar from '../components/Footernavbar'
 
 function Favorites() {
   return (
-    <div><Footernavbar/></div>
+    <div>
+      <Footernavbar/>
+    </div>
   )
 }
 
