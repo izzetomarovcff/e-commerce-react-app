@@ -24,7 +24,10 @@ function Footernavbar() {
     })
     if(window.location.pathname.includes("/shop/women/")){
       setIconPath({...iconpath, home:"../../icons/home.svg",shop:"../../icons/shopactive.svg",cart:"../../icons/cart.svg",favorites:"../../icons/favorites.svg",profile:"../../icons/profile.svg",admin:"../../icons/profile.svg"})
-
+    }else if(window.location.pathname.includes("/shop/men/")){
+      setIconPath({...iconpath, home:"../../icons/home.svg",shop:"../../icons/shopactive.svg",cart:"../../icons/cart.svg",favorites:"../../icons/favorites.svg",profile:"../../icons/profile.svg",admin:"../../icons/profile.svg"})
+    }else if(window.location.pathname.includes("/shop/kids/")){
+      setIconPath({...iconpath, home:"../../icons/home.svg",shop:"../../icons/shopactive.svg",cart:"../../icons/cart.svg",favorites:"../../icons/favorites.svg",profile:"../../icons/profile.svg",admin:"../../icons/profile.svg"})
     }
     switch(window.location.pathname){
       case "/":

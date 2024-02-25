@@ -154,7 +154,7 @@ function AddProduct() {
         requestDataBase(selectedFile)
     }
     const requestDataBase = async (selFile) => {
-        const imgRef = ref(imageDb, `test/${v4()}`)
+        const imgRef = ref(imageDb, `product/${v4()}`)
         try {
             await uploadBytes(imgRef, selFile)
             const downloadURL = await getDownloadURL(imgRef)
