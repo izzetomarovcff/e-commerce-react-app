@@ -5,11 +5,16 @@ function CollectionProduct() {
     const [productData, setProductData] = useState([])
     useEffect(() => {
         let collectionId = window.location.pathname.split("/")[3]
+
         const getData = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/collection/${collectionId}.json`)
                 let resData = await response.json()
-                setCollection({ ...resData, id: collectionId })
+                
+                if(resData.collectionFor == window.location.pathname.split("/")[2]){
+                    setCollection({ ...resData, id: collectionId })
+
+                }
             } catch (error) {
                 console.log(error)
             }
@@ -41,7 +46,7 @@ function CollectionProduct() {
     }, [collection])
     return (
         <div className='collectionproducts '>
-            {collection ? (<div className='collectionname  border'>{collection.collectionName}</div>) : (null)}
+            {collection ? (<div className='collectionname  border'>{collection.collectionName ? (collection.collectionName):("Incorrect Collection")}</div>) : (null)}
             <div className='products'>
                 {productData.length == 0 ? (null) : (
                     productData.map((product,keyproduct)=>{
