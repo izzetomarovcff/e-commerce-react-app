@@ -28,6 +28,17 @@ function Shop() {
     }
   }, [])
   useEffect(()=>{
+    switch(window.location.pathname.split("/")[2]){
+      case "women":
+        setForClass({...forClass, women: "activelementsfor", men: "elementsfor", kids: "elementsfor"})
+        break;
+      case "men":
+        setForClass({...forClass, women: "elementsfor", men: "activelementsfor", kids: "elementsfor"})
+        break;
+      case "kids":
+        setForClass({...forClass, women: "elementsfor", men: "elementsfor", kids: "activelementsfor"})
+        break;
+    }
     switch(window.location.pathname){
       case "/shop/women":
         setForClass({...forClass, women: "activelementsfor", men: "elementsfor", kids: "elementsfor"})
