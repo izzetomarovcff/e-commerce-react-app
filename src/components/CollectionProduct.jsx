@@ -46,7 +46,7 @@ function CollectionProduct() {
                 {productData.length == 0 ? (null) : (
                     productData.map((product,keyproduct)=>{
                         return(
-                            <div className="product" key={keyproduct} >
+                            <div className="product shadow-sm" key={keyproduct} >
                                 <div className='productimg'>
                                     <img src={product.imgUrl} alt="product" />
                                     {product.isSale ? (<div className='sale bg-primary'>-{product.salePer}%</div>) : (null)}

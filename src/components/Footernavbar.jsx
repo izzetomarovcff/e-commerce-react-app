@@ -22,6 +22,10 @@ function Footernavbar() {
         setAuthUser(null)
       }
     })
+    if(window.location.pathname.includes("/shop/women/")){
+      setIconPath({...iconpath, home:"../../icons/home.svg",shop:"../../icons/shopactive.svg",cart:"../../icons/cart.svg",favorites:"../../icons/favorites.svg",profile:"../../icons/profile.svg",admin:"../../icons/profile.svg"})
+
+    }
     switch(window.location.pathname){
       case "/":
         setIconPath({...iconpath, home:"icons/homeactive.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg", admin:"icons/profile.svg"})
