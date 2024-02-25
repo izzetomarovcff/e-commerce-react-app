@@ -25,7 +25,7 @@ function WomenCategory() {
         <div className='categories'>
             {categoryData.length == 0 ? (null):(
                 categoryData.map((category, categorykey)=>{
-                    return(<Link key={categorykey} to={`/shop/women/${category.id}`} className='category mt-3 rounded pt-4 pb-4'>{category.categoryName}</Link>)
+                    return(<Link key={categorykey} to={`/shop/women/category/${category.id}`} className='category mt-3 rounded pt-1 pb-1'>{category.categoryName}</Link>)
                 })
             )}
         </div>

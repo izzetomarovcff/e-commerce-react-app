@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
-function CollectionProduct() {
-    const [collection, setCollection] = useState(null)
+function CategoryProduct() {
+    const [category, setCategory] = useState(null)
     const [productData, setProductData] = useState([])
+
     useEffect(() => {
-        let collectionId = window.location.pathname.split("/")[4]
+        let categoryId = window.location.pathname.split("/")[4]
 
         const getData = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/collection/${collectionId}.json`)
+                const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/category/${categoryId}.json`)
                 let resData = await response.json()
-                
-                if(resData.collectionFor == window.location.pathname.split("/")[2]){
-                    setCollection({ ...resData, id: collectionId })
 
+                if (resData.categoryFor == window.location.pathname.split("/")[2]) {
+                    setCategory({ ...resData, id: categoryId })
                 }
             } catch (error) {
                 console.log(error)
@@ -29,9 +29,8 @@ function CollectionProduct() {
                 let resData = await response.json()
                 let arr = []
                 for (const key in resData) {
-                    if (resData[key].collectionId === collection.id) {
+                    if (resData[key].categoryId === category.id) {
                         arr.unshift({ ...resData[key], id: key })
-
                     }
                 }
                 setProductData(arr)
@@ -39,18 +38,18 @@ function CollectionProduct() {
                 console.log(error)
             }
         }
-        if (collection) {
+        if (category) {
             getData()
         }
 
-    }, [collection])
+    }, [category])
     return (
-        <div className='collectionproducts '>
-            {collection ? (<div className='collectionname  border'>{collection.collectionName ? (collection.collectionName):("Incorrect Collection")}</div>) : (null)}
+        <div className='categoryproducts '>
+            {category ? (<div className='categoryname  border'>{category.categoryName ? (category.categoryName) : ("Incorrect Category")}</div>) : (null)}
             <div className='products'>
                 {productData.length == 0 ? (null) : (
-                    productData.map((product,keyproduct)=>{
-                        return(
+                    productData.map((product, keyproduct) => {
+                        return (
                             <div className="product shadow-sm" key={keyproduct} >
                                 <div className='productimg'>
                                     <img src={product.imgUrl} alt="product" />
@@ -76,4 +75,4 @@ function CollectionProduct() {
     )
 }
 
-export default CollectionProduct
+export default CategoryProduct

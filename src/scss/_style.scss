@@ -328,12 +328,15 @@ a{
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: $primary;
+            border: 1px solid $primary;
             width: 90%;
-            color: #fff;
+            color: $primary;
             font-size: 25px;
             font-weight: 600;
             text-align: center;
+            background-color: $primary;
+            color: #fff;
+            
         }
     }
     .categories{
@@ -353,12 +356,13 @@ a{
             text-align: center;
         }
     }
-    .collectionproducts{
+
+    .collectionproducts, .categoryproducts{
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
-        .collectionname{
+        .collectionname, .categoryname{
             display: flex;
             justify-content: center;
             align-items: center;

@@ -9,6 +9,7 @@ import KidsCollection from '../components/KidsCollection'
 import CollectionProduct from '../components/CollectionProduct'
 import WomenCategory from '../components/WomenCategory'
 import MenCategory from '../components/MenCategory'
+import CategoryProduct from '../components/CategoryProduct'
 
 function Shop() {
   const [forClass, setForClass] = useState({
@@ -79,13 +80,18 @@ function Shop() {
       </div>
       <Routes>
         <Route path='/women' element={<><WomenCollection/><WomenCategory/></>}/>
-        <Route path='/women/*' element={<CollectionProduct/>}/>
+        <Route path='/women/collection/*' element={<CollectionProduct/>}/>
+        <Route path='/women/category/*' element={<CategoryProduct/>}/>
         
         <Route path='/men' element={<><MenCollection/><MenCategory/></>}/>
-        <Route path='/men/*' element={<CollectionProduct/>}/>
+        <Route path='/men/collection/*' element={<CollectionProduct/>}/>
+        <Route path='/men/category/*' element={<CategoryProduct/>}/>
+
 
         <Route path='/kids' element={<><KidsCollection/></>}/>
-        <Route path='/kids/*' element={<CollectionProduct/>}/>
+        <Route path='/kids/collection/*' element={<CollectionProduct/>}/>
+        <Route path='/kids/category/*' element={<CategoryProduct/>}/>
+
 
       </Routes>
         

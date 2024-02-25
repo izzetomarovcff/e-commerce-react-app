@@ -26,7 +26,7 @@ function WomenCollection() {
         <div className='collections'>
             {collectionData.length == 0 ? (null):(
                 collectionData.map((collection, collectionkey)=>{
-                    return(<Link key={collectionkey} to={`/shop/women/${collection.id}`} className='collection mt-3 rounded pt-4 pb-4'>{collection.collectionName}</Link>)
+                    return(<Link key={collectionkey} to={`/shop/women/collection/${collection.id}`} className='collection mt-3 rounded pt-5 pb-5'>{collection.collectionName}</Link>)
                 })
             )}
         </div>
