@@ -7,6 +7,8 @@ import WomenCollection from '../components/WomenCollection'
 import MenCollection from '../components/MenCollection'
 import KidsCollection from '../components/KidsCollection'
 import CollectionProduct from '../components/CollectionProduct'
+import WomenCategory from '../components/WomenCategory'
+import MenCategory from '../components/MenCategory'
 
 function Shop() {
   const [forClass, setForClass] = useState({
@@ -76,13 +78,13 @@ function Shop() {
         <div  className={forClass.kids} onClick={()=>handleClick("kids")}>Kids</div>
       </div>
       <Routes>
-        <Route path='/women' element={<WomenCollection/>}/>
+        <Route path='/women' element={<><WomenCollection/><WomenCategory/></>}/>
         <Route path='/women/*' element={<CollectionProduct/>}/>
         
-        <Route path='/men' element={<MenCollection/>}/>
+        <Route path='/men' element={<><MenCollection/><MenCategory/></>}/>
         <Route path='/men/*' element={<CollectionProduct/>}/>
 
-        <Route path='/kids' element={<KidsCollection/>}/>
+        <Route path='/kids' element={<><KidsCollection/></>}/>
         <Route path='/kids/*' element={<CollectionProduct/>}/>
 
       </Routes>

@@ -336,6 +336,23 @@ a{
             text-align: center;
         }
     }
+    .categories{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .category{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid $primary;
+            width: 90%;
+            color: $primary;
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
     .collectionproducts{
         display: flex;
         flex-direction: column;
