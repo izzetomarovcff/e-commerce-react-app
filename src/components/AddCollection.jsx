@@ -40,10 +40,10 @@ function AddCollection() {
     }
     function handleCheck() {
         if (collectionFormData.collectionName === "") {
-            return "Enter The Category Name!"
+            return "Enter The Collection Name!"
         } else if (collectionFormData.collectionFor === "") {
             return "Please Select Collection For!"
-        } if (collectionFormData.collectionImgUrl === "") {
+        } else if (collectionFormData.collectionImgUrl === "") {
             return "Please Upload Image!"
         } else {
             handleAddCollection()

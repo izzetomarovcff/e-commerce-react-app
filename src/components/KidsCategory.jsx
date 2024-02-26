@@ -25,7 +25,17 @@ function KidsCategory() {
         <div className='categories'>
             {categoryData.length == 0 ? (null) : (
                 categoryData.map((category, categorykey) => {
-                    return (<Link key={categorykey} to={`/shop/kids/category/${category.id}`} className='category mt-3 rounded pt-4 pb-4'>{category.categoryName}</Link>)
+                    return (
+                        <Link to={`/shop/kids/category/${category.id}`} key={categorykey}>
+                            <div className='category mt-3 rounded shadow-sm'>
+                                <div className='categorytext'>{category.categoryName}</div>
+                                <div className='categoryimg'>
+                                    <img src={category.categoryImgUrl} alt="" />
+                                </div>
+                                
+                            </div>
+                        </Link>
+                    )
                 })
             )}
         </div>

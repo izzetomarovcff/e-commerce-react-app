@@ -1,7 +1,9 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { auth } from '../firebase'
+import { auth, imageDb } from '../firebase'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { v4 } from 'uuid'
 
 function AddCategory() {
     const [error, setError] = useState(null)
@@ -10,7 +12,8 @@ function AddCategory() {
         {
             id: "",
             categoryName: "",
-            categoryFor: ""
+            categoryFor: "",
+            categoryImgUrl: ""
         }
     )
     useEffect(() => {
@@ -40,7 +43,9 @@ function AddCategory() {
             return "Enter The Category Name!"
         }else if(categoryFormData.categoryFor === ""){
             return "Please Selecet Category For!"
-        }{
+        }else if(categoryFormData.categoryImgUrl === ""){
+            return "Please Upload Image!"
+        }else{
             handleAddCategory()
             return null
         }
@@ -68,6 +73,49 @@ function AddCategory() {
             setError(null)
         }, 1500);
     }
+    const handleImgUpload = async (e) => {
+        const selectedFile = e.target.files[0]
+        requestDataBase(selectedFile)
+    }
+    const requestDataBase = async (selFile) => {
+        const imgRef = ref(imageDb, `category/${v4()}`)
+        try {
+            await uploadBytes(imgRef, selFile)
+            const downloadURL = await getDownloadURL(imgRef)
+            setCategoryFormData(prevState => ({
+                ...prevState,
+                categoryImgUrl: downloadURL
+            }))
+
+        } catch (error) {
+            switch (error.code) {
+                case "storage/unauthorized":
+                    setError(`${selFile.name} Failed To Upload To Server!\nYou Don't Have Permission To Upload Image!`)
+                    break;
+                case "storage/canceled":
+                    setError(`${selFile.name} Canceled To Upload To Server!\nTry Again!`)
+                    break;
+                case "storage/unknown":
+                    setError(`${selFile.name} Failed To Upload To Server!\nTry Again!`)
+                    break;
+                case "storage/network-error":
+                    setError(`${selFile.name} Failed To Upload To Server!\nTry Again!`)
+                    break;
+                case "file/invalid-file-type":
+                    setError(`${selFile.name} Failed To Upload To Server!\nInvalid File Type!`)
+                    break;
+                case "file/file-too-large":
+                    setError(`${selFile.name} Failed To Upload To Server!\nFile Too Large!`)
+                    break;
+                default:
+                    setError("Unknown Error Occurred\nTry Again İn a Few Minutes!")
+                    break
+            }
+            setTimeout(() => {
+                setError(null)
+            }, 2500);
+        }
+    }
 
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
@@ -85,6 +133,19 @@ function AddCategory() {
                     <option value="men">Men</option>
                     <option value="kids">Kids</option>
                 </select>
+            </div>
+            <div className="mb-3 w-100">
+                {categoryFormData.categoryImgUrl === "" ? (<label htmlFor="img" className="form-label">Upload Image</label>) : (null)}
+                {categoryFormData.categoryImgUrl === "" ? (<div className='d-flex justify-content-between'>
+                    <input type="file" name='img' className="form-control w-100" id="img" onChange={handleImgUpload} />
+                </div>) : (null)}
+                {categoryFormData.categoryImgUrl === "" ? (null) : (<div className='uploadedimg w-100 mt-3 rounded border shadow-sm'>
+                    <img src={categoryFormData.categoryImgUrl} alt='productimg' className='rounded  shadow' />
+
+                    <div className='removeuploadedfile' onClick={() => { setCategoryFormData({ ...categoryFormData, categoryImgUrl: "" }) }}>
+                        <img src="../icons/close.svg" alt="" />
+                    </div>
+                </div>)}
             </div>
             <button className='btn btn-primary w-100'>Add Category</button>
             <Link to="/admin" className='btn btn-outline-primary w-100 mt-3'>Cancel</Link>

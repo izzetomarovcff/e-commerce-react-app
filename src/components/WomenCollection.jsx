@@ -27,7 +27,7 @@ function WomenCollection() {
             {collectionData.length == 0 ? (null) : (
                 collectionData.map((collection, collectionkey) => {
                     return (
-                        <Link to={`/shop/women/collection/${collection.id}`} key={collectionkey} className='mt-3 rounded'>
+                        <Link to={`/shop/women/collection/${collection.id}`} key={collectionkey} className='mt-3 rounded shadow-sm'>
                             <div  className='collection rounded'>
                                 <img src={collection.collectionImgUrl} alt="" className='rounded' />
                                 <div className="overlay rounded"></div>
