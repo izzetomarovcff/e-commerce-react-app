@@ -293,7 +293,7 @@ a{
         align-items: center;
         justify-content: space-around;
         
-        
+        z-index: 100;
         padding-bottom: 5px;
         .elementsfor{
             display: flex;
@@ -324,20 +324,46 @@ a{
         flex-direction: column;
         align-items: center;
         width: 100%;
-        .collection{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid $primary;
+        a{
             width: 90%;
-            color: $primary;
-            font-size: 25px;
-            font-weight: 600;
-            text-align: center;
-            background-color: $primary;
-            color: #fff;
-            
+            height: 200px;
+            .collection{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                img{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                .overlay{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: $dark;
+                    opacity: .3;
+                    --bs-bg-opacity: .3;
+                }
+                .collectiontext{
+                    display: flex;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 25px;
+                    font-weight: 600;
+                    text-align: center;
+                    color: #fff;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+            }
         }
+        
     }
     .categories{
         display: flex;

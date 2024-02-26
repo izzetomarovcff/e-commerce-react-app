@@ -21,12 +21,21 @@ function WomenCollection() {
             }
         }
         getData()
-    },[])
+    }, [])
     return (
         <div className='collections'>
-            {collectionData.length == 0 ? (null):(
-                collectionData.map((collection, collectionkey)=>{
-                    return(<Link key={collectionkey} to={`/shop/women/collection/${collection.id}`} className='collection mt-3 rounded pt-5 pb-5'>{collection.collectionName}</Link>)
+            {collectionData.length == 0 ? (null) : (
+                collectionData.map((collection, collectionkey) => {
+                    return (
+                        <Link to={`/shop/women/collection/${collection.id}`} key={collectionkey} className='mt-3 rounded'>
+                            <div  className='collection rounded'>
+                                <img src={collection.collectionImgUrl} alt="" className='rounded' />
+                                <div className="overlay rounded"></div>
+                                <div className="collectiontext">{collection.collectionName}</div>
+                                
+                            </div>
+                        </Link>
+                    )
                 })
             )}
         </div>
