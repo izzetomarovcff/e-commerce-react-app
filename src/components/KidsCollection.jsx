@@ -22,14 +22,22 @@ function KidsCollection() {
         getData()
     }, [])
     return (
-        <Link to={`/shop/kids/collection/${collection.id}`} key={collectionkey} className='mt-3 rounded'>
-            <div  className='collection rounded'>
-                <img src={collection.collectionImgUrl} alt="" className='rounded' />
-                <div className="overlay rounded"></div>
-                <div className="collectiontext">{collection.collectionName}</div>
-                
-            </div>
-        </Link>
+        <div className='collections'>
+            {collectionData.length == 0 ? (null) : (
+                collectionData.map((collection, collectionkey) => {
+                    return (
+                        <Link to={`/shop/kids/collection/${collection.id}`} key={collectionkey} className='mt-3 rounded'>
+                            <div  className='collection rounded'>
+                                <img src={collection.collectionImgUrl} alt="" className='rounded' />
+                                <div className="overlay rounded"></div>
+                                <div className="collectiontext">{collection.collectionName}</div>
+                                
+                            </div>
+                        </Link>
+                    )
+                })
+            )}
+        </div>
     )
 }
 
