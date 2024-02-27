@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function CategoryProduct() {
     const [category, setCategory] = useState(null)
@@ -51,11 +52,13 @@ function CategoryProduct() {
                     productData.map((product, keyproduct) => {
                         return (
                             <div className="product shadow-sm" key={keyproduct} >
+                                <Link to={`/shop/product/${product.id}`}>
                                 <div className='productimg'>
                                     <img src={product.imgUrl} alt="product" />
                                     {product.isSale ? (<div className='sale bg-primary'>-{product.salePer}%</div>) : (null)}
                                     {product.isNew ? (<div className='new bg-dark'>new</div>) : (null)}
                                 </div>
+                                </Link>
                                 <div className='d-flex mt-2'>
                                     {Array.from({ length: product.starCount }, (_, index) => <img src="../../../image/home/sale/star.svg" alt="" key={index} />)}
                                     {Array.from({ length: 5 - product.starCount }, (_, index) => <img src="../../../image/home/sale/starinactive.svg" alt="" key={index} />)}

@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
+import ProductDetails from './components/ProductDetails';
 function App() {
 
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop/*" element={<Shop />} />
+        <Route path="/shop/product/*" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<Profile />} />

@@ -25,6 +25,9 @@ function Footernavbar() {
     if(window.location.pathname.includes("/shop/women/category") || window.location.pathname.includes("/shop/women/collection")||window.location.pathname.includes("/shop/men/category")||window.location.pathname.includes("/shop/men/collection") || window.location.pathname.includes("/shop/kids/category")||window.location.pathname.includes("/shop/kids/collection")){
       setIconPath({...iconpath, home:"../../../icons/home.svg",shop:"../../../icons/shopactive.svg",cart:"../../../icons/cart.svg",favorites:"../../../icons/favorites.svg",profile:"../../../icons/profile.svg",admin:"../../../icons/profile.svg"})
     }
+    if(window.location.pathname.includes("/shop/product/")){
+      setIconPath({...iconpath, home:"../../../icons/home.svg",shop:"../../../icons/shopactive.svg",cart:"../../../icons/cart.svg",favorites:"../../../icons/favorites.svg",profile:"../../../icons/profile.svg",admin:"../../../icons/profile.svg"})
+    }
     switch(window.location.pathname){
       case "/":
         setIconPath({...iconpath, home:"icons/homeactive.svg",shop:"icons/shop.svg",cart:"icons/cart.svg",favorites:"icons/favorites.svg",profile:"icons/profile.svg", admin:"icons/profile.svg"})
