@@ -20,6 +20,8 @@ function Home() {
   }, [])
 
 
+
+
   return (
     <div className='homepage'>
       <div className='checksale'>
