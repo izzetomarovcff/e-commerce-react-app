@@ -59,14 +59,14 @@ function CategoryProduct() {
                                     {product.isNew ? (<div className='new bg-dark'>new</div>) : (null)}
                                 </div>
                                 </Link>
-                                <div className='d-flex mt-2'>
+                                <div className='d-flex mt-2 ms-2'>
                                     {Array.from({ length: product.starCount }, (_, index) => <img src="../../../image/home/sale/star.svg" alt="" key={index} />)}
                                     {Array.from({ length: 5 - product.starCount }, (_, index) => <img src="../../../image/home/sale/starinactive.svg" alt="" key={index} />)}
                                     <p className='mb-0 fs-6'>({product.starPoint})</p>
                                 </div>
-                                <p className='mb-1 mt-1'>{product.brandName}</p>
-                                <h6>{product.productName}</h6>
-                                <div className='d-flex'>{product.isSale ? (<del className='me-2' >{product.oldPrice} $</del>) : (null)}<p className='text-primary newprice'>{product.price} $</p></div>
+                                <p className='mb-1 mt-1 ms-2'>{product.brandName}</p>
+                                <h6 className='ms-2'>{product.productName}</h6>
+                                <div className='d-flex ms-2'>{product.isSale ? (<del className='me-2' >{product.oldPrice} $</del>) : (null)}<p className='text-primary newprice'>{product.price} $</p></div>
                                 <div className='addfav shadow-sm'><img src="../../../image/home/sale/heart.svg" alt="" /></div>
                             </div>
                         )

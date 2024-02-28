@@ -26,7 +26,8 @@ function AddProduct() {
             favorite: false,
             categoryId: "",
             collectionId: "",
-            productFor: ""
+            productFor: "",
+            sizes: ""
         }
     )
     useEffect(() => {
@@ -192,6 +193,7 @@ function AddProduct() {
             }, 2500);
         }
     }
+    
     return (
         <form onSubmit={handleSubmit} className='pt-3'>
 
@@ -276,6 +278,11 @@ function AddProduct() {
                     )}
                 </select>
             </div>
+            <div className="mb-3 w-100">
+                <label htmlFor="sizes" className="form-label">Size</label>
+                <input type="text" name='sizes' className="form-control" id="sizes" value={productFormData.sizes} onChange={handleChange} autoComplete='off' placeholder='XL/2XL/3XL' />
+            </div>
+            
             {productFormData.isNew ? (null) : (
                 <div className="mb-3 w-100">
                     <div className='d-flex '><input type="checkbox" name='isSale' className="form-check" id="isSale" checked={productFormData.isSale} onChange={handleChange} autoComplete='off' placeholder='' /><p className='mb-0 ms-2'>Have Sale</p></div>

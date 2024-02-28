@@ -13,6 +13,7 @@ import CategoryProduct from '../components/CategoryProduct'
 import KidsCategory from '../components/KidsCategory'
 
 function Shop() {
+  const [header, setHeader] = useState("Shop")
   const [forClass, setForClass] = useState({
     women: "elementsfor",
     men: "elementsfor",
@@ -31,6 +32,7 @@ function Shop() {
       listen()
     }
   }, [])
+
   useEffect(()=>{
     switch(window.location.pathname.split("/")[2]){
       case "women":
@@ -71,8 +73,10 @@ function Shop() {
   }
   return (
     <div className='shoppage'>
-      <div className='headerbox rounded w-100'>
-        <h1>Categories</h1>
+      <div className='headerbox w-100'>
+        <div className="none"></div>
+        <h1>{header}</h1>
+        <div className='none'></div>
       </div>
       <div className='selecetfor  bg-secondary'>
         <div  className={forClass.women} onClick={()=>handleClick("women")}>Women</div>

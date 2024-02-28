@@ -275,11 +275,23 @@ a{
     padding-bottom: 61px;
     .headerbox{
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
+        .back{
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            height: 100%;
+        }
         h1{
             font-weight: 600;
-        }   
+            margin: 0;
+            padding: 0;
+        } 
+        .none{
+            width: 44px;
+            height: 100%;
+        }  
     }
     .selecetfor{
         --bs-bg-opacity: .7;

@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Footernavbar from './Footernavbar'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../firebase'
 
 function ProductDetails() {
     const [product, setProduct] = useState(null)
+    useEffect(() => {
+        const listen = onAuthStateChanged(auth, (user) => {
+          // console.log(user.email) //check token status
+          if (user) {
+          } else {
+            window.location.href = "/signup"
+          }
+        })
+        return () => {
+          listen()
+        }
+      }, [])
     useEffect(() => {
         let productId = window.location.pathname.split("/")[3]
 
@@ -45,6 +59,9 @@ function ProductDetails() {
                     <div className="sizeandfav mt-2">
                         <select className='size form-control w-75 '>
                             <option value="">Size</option>
+                            {product.sizes.split("/").map((size, sizekey)=>{
+                                return(<option key={sizekey} value={size}>{size}</option>)
+                            })}
                         </select>
                         <div className='addfavpd shadow'>
                             <img src="/image/home/sale/heart.svg" alt="" />
