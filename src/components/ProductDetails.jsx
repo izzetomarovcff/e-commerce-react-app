@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import Footernavbar from './Footernavbar'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
+import { useDispatch, useSelector } from 'react-redux'
+import { AddToCart } from '../redux/actions'
 
 function ProductDetails() {
     const [product, setProduct] = useState(null)
+    const [productToCart,setProductTocart] = useState({
+        productid : "",
+        productSize: ""
+    })
+    const dispatch = useDispatch()
+    const { GeneralResponse } = useSelector(state => state)
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
           // console.log(user.email) //check token status
@@ -19,13 +26,12 @@ function ProductDetails() {
       }, [])
     useEffect(() => {
         let productId = window.location.pathname.split("/")[3]
-
         const getData = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/products/${productId}.json`)
                 let resData = await response.json()
                 setProduct({ ...resData, id: productId })
-                console.log(resData)
+                setProductTocart({...productToCart, productid:productId})
             } catch (error) {
                 console.log(error)
             }
@@ -46,6 +52,16 @@ function ProductDetails() {
 
         }
     }
+    const handleChange = (e)=>{
+        const {value} = e.target
+        setProductTocart(prevState=>({
+            ...prevState,
+            productSize: value
+        }))
+    }
+    const handleAddCart = ()=>{
+        dispatch(AddToCart({...product, sizes: productToCart.productSize }))
+    }
     return (
         <div className='productdetails'>
             <div className='productheader bg-secondary'>
@@ -57,7 +73,7 @@ function ProductDetails() {
                 <div className="product">
                     <div className='productimg'><img src={product.imgUrl} alt="" /></div>
                     <div className="sizeandfav mt-2">
-                        <select className='size form-control w-75 '>
+                        <select className='size form-control w-75' onChange={handleChange}>
                             <option value="">Size</option>
                             {product.sizes.split("/").map((size, sizekey)=>{
                                 return(<option key={sizekey} value={size}>{size}</option>)
@@ -79,7 +95,7 @@ function ProductDetails() {
                     </div>
                     <p className='longtext mt-2'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam veritatis commodi ipsum ea nihil dolores, dolorem, quasi quod maxime, voluptatum alias eos ex eligendi quo. Suscipit ex rerum dolorem assumenda.</p>
                     <div className='footer bg-white shadow-lg'>
-                        <button className='btn btn-lg btn-primary w-75'>Add To Cart</button>
+                        <button className='btn btn-lg btn-primary w-75' onClick={handleAddCart}>Add To Cart</button>
                     </div>
                 </div>
             ) : (null)}

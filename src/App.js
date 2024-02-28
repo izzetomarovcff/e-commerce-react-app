@@ -9,10 +9,14 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
 import ProductDetails from './components/ProductDetails';
+import { createStore } from 'redux';
+import reducers from '../src/redux';
+import { Provider } from 'react-redux';
 function App() {
-
+  const store = createStore(reducers)
   return (
-    
+    <Provider store = {store}>
+
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -27,6 +31,7 @@ function App() {
         <Route path="/forgetpassword" element={<ForgotPassword />} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   );
 }
 
