@@ -31,7 +31,6 @@ function ProductDetails() {
                 const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/products/${productId}.json`)
                 let resData = await response.json()
                 setProduct({ ...resData, id: productId })
-                setProductTocart({...productToCart, productid:productId})
             } catch (error) {
                 console.log(error)
             }
@@ -60,7 +59,10 @@ function ProductDetails() {
         }))
     }
     const handleAddCart = ()=>{
-        dispatch(AddToCart({...product, sizes: productToCart.productSize }))
+        dispatch(AddToCart({...product, sizes: productToCart.productSize, count : 1}))
+    }
+    const test = ()=>{
+        console.log(GeneralResponse.cart.find(product => product.id === product.id))
     }
     return (
         <div className='productdetails'>
@@ -95,7 +97,16 @@ function ProductDetails() {
                     </div>
                     <p className='longtext mt-2'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam veritatis commodi ipsum ea nihil dolores, dolorem, quasi quod maxime, voluptatum alias eos ex eligendi quo. Suscipit ex rerum dolorem assumenda.</p>
                     <div className='footer bg-white shadow-lg'>
-                        <button className='btn btn-lg btn-primary w-75' onClick={handleAddCart}>Add To Cart</button>
+                        {GeneralResponse.cart == 0 ? (<button className='btn btn-lg btn-primary w-75' onClick={handleAddCart}>Add To Cart</button>) : (
+                            <div className='btngroup'>
+                                <div className='btn btnleft btn-primary '>-</div>
+                                <div className='productcount '>
+                                    {GeneralResponse.cart.length}
+                                </div>
+                                <div className='btn btnright btn-primary ' onClick={test}>+</div>
+                            </div>
+                        )}
+                        
                     </div>
                 </div>
             ) : (null)}

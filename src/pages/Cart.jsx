@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Footernavbar from '../components/Footernavbar'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
+import { useSelector } from 'react-redux'
 
 function Cart() {
+  const { GeneralResponse } = useSelector(state => state)
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       // console.log(user.email) //check token status
@@ -20,8 +22,10 @@ function Cart() {
     <div className='cart'>
       <div className='header bg-secondary'>My Bag</div>
       <div className='products'>
-        {JSON.parse(window.localStorage.getItem("cart")) ?(
-          JSON.parse(window.localStorage.getItem("cart")).map((product,productkey)=>{
+        {GeneralResponse.cart.length == 0 ?(
+          <div className='mx-auto mt-5'>Bag Is Empty</div>
+        ) : (
+          GeneralResponse.cart.map((product,productkey)=>{
             return(
               <div className='product shadow-sm' key={productkey}>
                 <div className="imgdiv">
@@ -33,8 +37,6 @@ function Cart() {
               </div>
             )
           })
-        ) : (
-          null
         )}
       </div>
       
