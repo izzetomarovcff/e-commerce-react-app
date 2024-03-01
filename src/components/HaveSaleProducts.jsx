@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { AddToFav } from '../redux/actions'
 
 function HaveSaleProducts() {
   const [productdata,setProductData] = useState([])
+  const { GeneralResponse } = useSelector(state => state)
+    const dispatch = useDispatch()
   useEffect(()=>{
+    
+
     const getData = async () =>{
       try{
         const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/products.json`)
@@ -21,7 +27,9 @@ function HaveSaleProducts() {
     getData()
     
   },[])
-  
+  const addFav = (product)=>{
+    dispatch(AddToFav(product))        
+}
   return (
     <div id='salesection' className='pt-5'>
         
@@ -45,7 +53,8 @@ function HaveSaleProducts() {
                   <p className='mb-1 mt-1'>{product.brandName}</p>
                   <h6>{product.productName}</h6>
                   <div className='d-flex'>{product.isSale ? (<del className='me-2' >{product.oldPrice} $</del>) : (null)}<p className='text-primary newprice'>{product.price} $</p></div>
-                  <div className='addfav shadow-sm'><img src="image/home/sale/heart.svg" alt="" /></div>
+                  {GeneralResponse.favorites.find(item=>item.id == product.id) ? (<div className='addfav shadow-sm bg-primary' onClick={()=>addFav(product)}><img src="image/home/sale/heart.svg" alt="" /></div>):(<div className='addfav shadow-sm' onClick={()=>addFav(product)}><img src="image/home/sale/heart.svg" alt="" /></div>)}
+                  
                 </div>
               )
             })}
