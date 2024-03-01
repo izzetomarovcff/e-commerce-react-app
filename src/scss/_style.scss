@@ -267,12 +267,11 @@ a{
 }
 .shoppage{
     width: 100vw;
-    height: 7000px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-    padding-bottom: 61px;
+    padding-bottom: 75px;
     .headerbox{
         display: flex;
         justify-content: space-between;
@@ -771,7 +770,7 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 61px;
+    padding-bottom: 135px;
     .header{
         --bs-bg-opacity: .7;
         backdrop-filter: blur(10px);
@@ -793,7 +792,7 @@ a{
         flex-direction: column;
         .product{
             width: 100%;
-            height: 110px;
+            height: 130px;
             margin-top: 15px;
             border-radius: 8px;
             display: flex;
@@ -802,7 +801,7 @@ a{
             flex-direction: row;
             background-color: #fff;
             .imgdiv{
-                width: 25%;
+                width: 30%;
                 height: 100%;
                 border-radius: 8px 0 0 8px;
                 img{
@@ -814,9 +813,106 @@ a{
                 }
             }
             .details{
-                width: 73%;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: space-between;
+                width: 67%;
                 height: 100%;
                 border-radius: 0 8px 8px 0;
+                .textcontent{
+                    width: 100%;
+                    .info{
+                        h1{
+                            font-size: 25px;
+                            margin-top: 5px;
+                            margin-bottom: 0;
+                            padding: 0;
+                        }
+                        .size{
+                            margin: 0;
+                            padding: 0;
+                            font-size: 17px;
+                        }
+                    }
+                    
+                }
+                .countandprice{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    height: 50px;
+                    .countinfo{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100px;
+                        height: 100%;
+                        .countplus{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 30px;
+                            height: 30px;
+                            background-color: $white;
+                            border-radius: 50%;
+                        }
+                        .countminus{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 30px;
+                            height: 30px;
+                            background-color: $white;
+                            border-radius: 50%;
+                        }
+                    }
+                    .price{
+                        font-size: 20px;
+                        font-weight: 500;
+                        letter-spacing: 2px;
+                        color: $primary;
+                        del{
+                            font-size: 15px;
+                            color: #9B9B9B;
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+    }
+    .footer{
+        --bs-bg-opacity: .7;
+        backdrop-filter: blur(3px);
+        position: fixed;
+        bottom: 70px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 101;
+        width: 100%;
+        height: 50px;
+        background-color: $white;
+        .total{
+            margin-left: 10px;
+            font-size: 23px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+        .amount{
+            margin-right: 10px;
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            del{
+                font-size: 15px;
+                color: #9B9B9B;
             }
         }
     }

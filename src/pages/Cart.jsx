@@ -2,10 +2,24 @@ import React, { useEffect, useState } from 'react'
 import Footernavbar from '../components/Footernavbar'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { ProductMinus, ProductPlus } from '../redux/actions'
 
 function Cart() {
   const { GeneralResponse } = useSelector(state => state)
+  const [sum,setSum] = useState(0)
+  const [oldSum,setOldSum] = useState(null)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    let total =0
+    let totalold=0
+    for(let i of GeneralResponse.cart){
+      totalold = totalold + i.count*i.oldPrice
+      total = total + i.count*i.price
+    }
+    setOldSum(totalold)
+    setSum(total)
+  },[GeneralResponse])  
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       // console.log(user.email) //check token status
@@ -18,6 +32,20 @@ function Cart() {
       listen()
     }
   }, [])
+  const productCountPlus = (id)=>{
+    let stateres = GeneralResponse.cart.find(item=>item.id == id)
+    if(stateres){
+        dispatch(ProductPlus(id))
+    }else{
+        
+    }        
+}
+const productCountMinus = (id) =>{
+    let stateres = GeneralResponse.cart.find(item=>item.id == id)
+    if(stateres){
+        dispatch(ProductMinus(id))
+    }
+}
   return (
     <div className='cart'>
       <div className='header bg-secondary'>My Bag</div>
@@ -32,13 +60,45 @@ function Cart() {
                   <img src={product.imgUrl} alt="" />
                 </div>
                 <div className="details">
-                  <h3>{product.productName}</h3>
-                  <h3>{product.count}</h3>
+                  <div className="textcontent">
+                    <div className='info'>
+                      <h1>{product.productName}</h1>
+                      {product.sizes == "" ? (null):(
+                        <p className='size mt-1'><span>Size:</span><span className='text-dark ms-2'>{product.sizes}</span></p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="countandprice mb-3">
+                    <div className="countinfo">
+                      <div className="countminus shadow" onClick={()=>productCountMinus(product.id)}>
+                        <img src="/icons/minus.svg" alt="" />
+                      </div>
+                      {product.count}
+                      <div className="countplus shadow" onClick={()=>productCountPlus(product.id)}>
+                        <img src="/icons/plus.svg" alt="" />
+                      </div>
+
+                    </div>
+                    <div className="price me-4 ">
+                      {product.oldPrice*product.count == 0 ? (null):(<del className='me-1'>${product.oldPrice*product.count}</del>)}
+                      ${product.price*product.count}
+                    </div>
+
+                  </div>
+                  
                 </div>
               </div>
             )
           })
         )}
+      </div>
+      <div className="footer bg-white">
+        <div className='total text-dark ms-4'>Total: </div>
+        <div className="amount text-primary me-4">
+          {oldSum == 0 ? (null):(<del className='me-2'>${oldSum}</del>)}
+          
+          ${sum}
+        </div>
       </div>
       
       <Footernavbar/>

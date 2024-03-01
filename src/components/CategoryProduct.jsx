@@ -62,7 +62,7 @@ function CategoryProduct() {
                                 <div className='d-flex mt-2 ms-2'>
                                     {Array.from({ length: product.starCount }, (_, index) => <img src="../../../image/home/sale/star.svg" alt="" key={index} />)}
                                     {Array.from({ length: 5 - product.starCount }, (_, index) => <img src="../../../image/home/sale/starinactive.svg" alt="" key={index} />)}
-                                    <p className='mb-0 fs-6'>({product.starPoint})</p>
+                                    <p className='mb-0 fs-6 ms-1'>({product.starPoint})</p>
                                 </div>
                                 <p className='mb-1 mt-1 ms-2'>{product.brandName}</p>
                                 <h6 className='ms-2'>{product.productName}</h6>
