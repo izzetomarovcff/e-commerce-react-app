@@ -17,7 +17,7 @@ function Favorites() {
     <div className='favorites'>
       <div className='header bg-secondary'>Favorites</div>
       <div className='products'>
-        {GeneralResponse.favorites.length == 0 ? (<div className='mx-auto mt-5'>Bag Is Empty</div>):(
+        {GeneralResponse.favorites.length == 0 ? (<div className='mx-auto mt-5'>Favorites Is Empty</div>):(
           GeneralResponse.favorites.map((product,productkey)=>{
             return(
               <div className='product shadow-sm' key={productkey}>
