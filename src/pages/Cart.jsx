@@ -33,6 +33,7 @@ function Cart() {
                 </div>
                 <div className="details">
                   <h3>{product.productName}</h3>
+                  <h3>{product.count}</h3>
                 </div>
               </div>
             )

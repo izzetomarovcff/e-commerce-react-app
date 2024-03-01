@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddToCart } from '../redux/actions'
+import { AddToCart, ProductMinus, ProductPlus } from '../redux/actions'
 
 function ProductDetails() {
     const [product, setProduct] = useState(null)
@@ -30,7 +30,7 @@ function ProductDetails() {
             try {
                 const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/products/${productId}.json`)
                 let resData = await response.json()
-                setProduct({ ...resData, id: productId })
+                setProduct({ ...resData, id: productId, count: 1 })
             } catch (error) {
                 console.log(error)
             }
@@ -59,10 +59,21 @@ function ProductDetails() {
         }))
     }
     const handleAddCart = ()=>{
-        dispatch(AddToCart({...product, sizes: productToCart.productSize, count : 1}))
+        dispatch(AddToCart({...product, sizes: productToCart.productSize}))
     }
-    const test = ()=>{
-        console.log(GeneralResponse.cart.find(product => product.id === product.id))
+    const productCountPlus = ()=>{
+        let stateres = GeneralResponse.cart.find(item=>item.id == product.id)
+        if(stateres){
+            dispatch(ProductPlus(product.id))
+        }else{
+            
+        }        
+    }
+    const productCountMinus = () =>{
+        let stateres = GeneralResponse.cart.find(item=>item.id == product.id)
+        if(stateres){
+            dispatch(ProductMinus(product.id))
+        }
     }
     return (
         <div className='productdetails'>
@@ -97,14 +108,16 @@ function ProductDetails() {
                     </div>
                     <p className='longtext mt-2'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam veritatis commodi ipsum ea nihil dolores, dolorem, quasi quod maxime, voluptatum alias eos ex eligendi quo. Suscipit ex rerum dolorem assumenda.</p>
                     <div className='footer bg-white shadow-lg'>
-                        {GeneralResponse.cart == 0 ? (<button className='btn btn-lg btn-primary w-75' onClick={handleAddCart}>Add To Cart</button>) : (
+                        {GeneralResponse.cart.find(item=>item.id == product.id) ? (
                             <div className='btngroup'>
-                                <div className='btn btnleft btn-primary '>-</div>
-                                <div className='productcount '>
-                                    {GeneralResponse.cart.length}
-                                </div>
-                                <div className='btn btnright btn-primary ' onClick={test}>+</div>
+                            <div className='btn btnleft btn-primary' onClick={productCountMinus}>-</div>
+                            <div className='productcount '>
+                                {GeneralResponse.cart.find(item=>item.id == product.id).count}
                             </div>
+                            <div className='btn btnright btn-primary ' onClick={productCountPlus}>+</div>
+                        </div>
+                        ) : (
+                            <button className='btn btn-lg btn-primary w-75' onClick={handleAddCart}>Add To Cart</button>
                         )}
                         
                     </div>
