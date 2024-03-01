@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { AddToFav } from '../redux/actions'
 
 function CollectionProduct() {
+    const { GeneralResponse } = useSelector(state => state)
+    const dispatch = useDispatch()
+
     const [collection, setCollection] = useState(null)
     const [productData, setProductData] = useState([])
     useEffect(() => {
@@ -45,6 +50,9 @@ function CollectionProduct() {
         }
 
     }, [collection])
+    const addFav = (product)=>{
+        dispatch(AddToFav(product))        
+    }
     return (
         <div className='collectionproducts '>
             {collection ? (<div className='collectionname  border'>{collection.collectionName ? (collection.collectionName):("Incorrect Collection")}</div>) : (null)}
@@ -68,7 +76,8 @@ function CollectionProduct() {
                                 <p className='mb-1 mt-1 ms-2'>{product.brandName}</p>
                                 <h6 className='ms-2'>{product.productName}</h6>
                                 <div className='d-flex ms-2'>{product.isSale ? (<del className='me-2' >{product.oldPrice} $</del>) : (null)}<p className='text-primary newprice'>{product.price} $</p></div>
-                                <div className='addfav shadow-sm'><img src="../../../image/home/sale/heart.svg" alt="" /></div>
+                                {GeneralResponse.favorites.find(item=>item.id == product.id) ? (<div className='addfav shadow-sm bg-primary' onClick={()=>addFav(product)}><img src="../../../image/home/sale/heart.svg" alt="" /></div>):(<div className='addfav shadow-sm' onClick={()=>addFav(product)}><img src="../../../image/home/sale/heart.svg" alt="" /></div>)}
+                                
                             </div>
                         )
                     })

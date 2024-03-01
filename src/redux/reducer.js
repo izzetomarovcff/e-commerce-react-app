@@ -6,6 +6,16 @@ export default (state = INITIAL_STATE, action)=>{
     switch (action.type){
         case "ADD_TO_CART":
             return { ...state, cart: [...state.cart, action.payload] }
+        case "ADD_TO_FAV":
+            let producttofav = state.favorites.find(item=>item.id == action.payload.id)
+            if(producttofav){
+                let removeindexfav = state.favorites.indexOf(producttofav)
+                let newfav = state.favorites
+                newfav.splice(removeindexfav, 1)
+                return { ...state, favorites: newfav }            
+            }else{
+             return { ...state, favorites: [...state.favorites, action.payload] }
+            }
         case "PRODUCT_PLUS":
             let plusproduct = state.cart.find(item=>item.id == action.payload)
             let plusindex = state.cart.indexOf(plusproduct)
@@ -28,7 +38,12 @@ export default (state = INITIAL_STATE, action)=>{
                 }
                 
             }
-            
+        case "PRODUCT_REMOVE_CART":
+            let removeproduct = state.cart.find(item=>item.id == action.payload)
+            let removeindex = state.cart.indexOf(removeproduct)
+            let newcart = state.cart
+            newcart.splice(removeindex, 1)
+            return { ...state, cart: newcart }            
         default:
             return state;
     }

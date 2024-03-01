@@ -4,15 +4,27 @@ export const AddToCart = product =>{
         payload: product
     }
 }
-export const ProductPlus = product =>{
+export const AddToFav = product =>{
     return {
-        type: 'PRODUCT_PLUS',
+        type: 'ADD_TO_FAV',
         payload: product
     }
 }
-export const ProductMinus = product =>{
+export const ProductPlus = id =>{
+    return {
+        type: 'PRODUCT_PLUS',
+        payload: id
+    }
+}
+export const ProductMinus = id =>{
     return {
         type: 'PRODUCT_MINUS',
-        payload: product
+        payload: id
+    }
+}
+export const ProductRemoveCart = id =>{
+    return {
+        type: 'PRODUCT_REMOVE_CART',
+        payload: id
     }
 }

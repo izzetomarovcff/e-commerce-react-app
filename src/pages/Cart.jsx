@@ -3,7 +3,7 @@ import Footernavbar from '../components/Footernavbar'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useDispatch, useSelector } from 'react-redux'
-import { ProductMinus, ProductPlus } from '../redux/actions'
+import { ProductMinus, ProductPlus, ProductRemoveCart } from '../redux/actions'
 
 function Cart() {
   const { GeneralResponse } = useSelector(state => state)
@@ -46,6 +46,12 @@ const productCountMinus = (id) =>{
         dispatch(ProductMinus(id))
     }
 }
+const removecart = (id)=>{
+  let stateres = GeneralResponse.cart.find(item=>item.id == id)
+  if(stateres){
+    dispatch(ProductRemoveCart(id))
+  }
+}
   return (
     <div className='cart'>
       <div className='header bg-secondary'>My Bag</div>
@@ -66,6 +72,9 @@ const productCountMinus = (id) =>{
                       {product.sizes == "" ? (null):(
                         <p className='size mt-1'><span>Size:</span><span className='text-dark ms-2'>{product.sizes}</span></p>
                       )}
+                    </div>
+                    <div className='totrash me-3 mt-2' onClick={()=>removecart(product.id)}>
+                      <img src="/icons/trash.svg" alt="" />
                     </div>
                   </div>
                   <div className="countandprice mb-3">

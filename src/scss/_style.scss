@@ -822,6 +822,20 @@ a{
                 border-radius: 0 8px 8px 0;
                 .textcontent{
                     width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .removefav{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        width: 30px;
+                        height: 30px;
+                        img{
+                            width: 30px;
+                        }
+                    }
                     .info{
                         h1{
                             font-size: 25px;
@@ -913,6 +927,142 @@ a{
             del{
                 font-size: 15px;
                 color: #9B9B9B;
+            }
+        }
+    }
+}
+.favorites{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 85px;
+    .header{
+        --bs-bg-opacity: .7;
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top:0;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 60px;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 100;
+        font-size: 27px;
+        font-weight: 600;
+    }
+    .products{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        .product{
+            width: 100%;
+            height: 130px;
+            margin-top: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            background-color: #fff;
+            .imgdiv{
+                width: 30%;
+                height: 100%;
+                border-radius: 8px 0 0 8px;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 8px 0 0 8px;
+
+                }
+            }
+            .details{
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: space-between;
+                width: 67%;
+                height: 100%;
+                border-radius: 0 8px 8px 0;
+                .textcontent{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .removefav{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        width: 30px;
+                        height: 30px;
+                        img{
+                            width: 30px;
+                        }
+                    }
+                    .info{
+                        h1{
+                            font-size: 25px;
+                            margin-top: 5px;
+                            margin-bottom: 0;
+                            padding: 0;
+                        }
+                        .size{
+                            margin: 0;
+                            padding: 0;
+                            font-size: 17px;
+                        }
+                    }
+                    
+                }
+                .countandprice{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    height: 50px;
+                    .countinfo{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100px;
+                        height: 100%;
+                        .countplus{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 30px;
+                            height: 30px;
+                            background-color: $white;
+                            border-radius: 50%;
+                        }
+                        .countminus{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 30px;
+                            height: 30px;
+                            background-color: $white;
+                            border-radius: 50%;
+                        }
+                    }
+                    .price{
+                        font-size: 20px;
+                        font-weight: 500;
+                        letter-spacing: 2px;
+                        color: $primary;
+                        del{
+                            font-size: 15px;
+                            color: #9B9B9B;
+                        }
+                    }
+                    
+                }
+                
             }
         }
     }

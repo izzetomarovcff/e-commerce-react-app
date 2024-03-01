@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddToCart, ProductMinus, ProductPlus } from '../redux/actions'
+import { AddToCart, AddToFav, ProductMinus, ProductPlus } from '../redux/actions'
 
 function ProductDetails() {
     const [product, setProduct] = useState(null)
@@ -75,6 +75,9 @@ function ProductDetails() {
             dispatch(ProductMinus(product.id))
         }
     }
+    const addFav = (product)=>{
+        dispatch(AddToFav(product))        
+    }
     return (
         <div className='productdetails'>
             <div className='productheader bg-secondary'>
@@ -92,9 +95,8 @@ function ProductDetails() {
                                 return(<option key={sizekey} value={size}>{size}</option>)
                             })}
                         </select>
-                        <div className='addfavpd shadow'>
-                            <img src="/image/home/sale/heart.svg" alt="" />
-                        </div>
+                        {GeneralResponse.favorites.find(item=>item.id == product.id) ? (<div className='addfavpd shadow bg-primary' onClick={()=>addFav(product)}><img src="/image/home/sale/heart.svg" alt="" /></div>):(<div className='addfavpd shadow' onClick={()=>addFav(product)}><img src="/image/home/sale/heart.svg" alt="" /></div>)}
+                        
                     </div>
                     <div className="brandandprice">
                         <div className="brand"><h1>{product.brandName}</h1></div>
