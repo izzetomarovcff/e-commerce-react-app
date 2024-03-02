@@ -2,6 +2,7 @@ import React from 'react'
 import Footernavbar from '../components/Footernavbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { AddToCart, AddToFav } from '../redux/actions'
+import { Link } from 'react-router-dom'
 
 function Favorites() {
   const { GeneralResponse } = useSelector(state => state)
@@ -21,20 +22,24 @@ function Favorites() {
           GeneralResponse.favorites.map((product,productkey)=>{
             return(
               <div className='product shadow-sm' key={productkey}>
-                <div className="imgdiv">
-                  <img src={product.imgUrl} alt="" />
-                </div>
+                <Link to={`/shop/product/${product.id}`}>
+                  <div className="imgdiv">
+                    <img src={product.imgUrl} alt="" />
+                  </div>
+                </Link>
                 <div className="details">
                   <div className="textcontent">
-                    <div className='info'>
-                      <h1>{product.productName}</h1>
-                      {product.sizes == "" ? (null):(
-                        <p className='size mt-1'><span>Size:</span><span className='text-dark ms-2'>{product.sizes}</span></p>
-                      )}
+                    <div className='info mt-2'>
+                      <Link className='h1' to={`/shop/product/${product.id}`}>{product.productName}</Link>
+                      
+                      <p className='size mt-1'>{product.brandName}</p>
                     </div>
-                    <div className='removefav me-3 mt-2 bg-primary shadow-sm' onClick={()=>removefav(product)}>
-                      <img src="/image/home/sale/heart.svg" alt="" />
+                    <div className="removedavcontainer">
+                      <div className='removefav me-3 mt-3 bg-primary shadow-sm' onClick={()=>removefav(product)}>
+                        <img src="/image/home/sale/heart.svg" alt="" />
+                      </div>
                     </div>
+                    
                   </div>
                   <div className="countandprice mb-3">
                     <div className="countinfo">

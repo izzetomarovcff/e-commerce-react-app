@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function NewProducts() {
   const [productdata,setProductData] = useState([])
@@ -30,13 +31,13 @@ function NewProducts() {
             {productdata.filter(product => product.isNew).map((product, keyproduct) => {
               return (
                 <div className="product mx-3" key={keyproduct} >
-                  <div className='productimg'>
+                  <Link to={`/shop/product/${product.id}`} className='productimg'>
                     <img src={product.imgUrl} alt="product" />
                     {product.isSale ? (<div className='sale bg-primary'>-{product.salePer}%</div>) : (null)}
                     {product.isNew ? (<div className='new bg-dark'>NEW</div>) : (null)}
-                  </div>
+                  </Link>
                   <div className='d-flex mt-2'>
-                  {Array.from({length: product.starCount},(_, index)=><img src="image/home/sale/star.svg" alt="" key={index} />)}
+                    {Array.from({length: product.starCount},(_, index)=><img src="image/home/sale/star.svg" alt="" key={index} />)}
                     {Array.from({length: 5 - product.starCount},(_, index)=><img src="image/home/sale/starinactive.svg" alt="" key={index} />)}
                     <p className='mb-0 fs-6'>({product.starPoint})</p>
                   </div>

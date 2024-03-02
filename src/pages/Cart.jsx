@@ -4,6 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductMinus, ProductPlus, ProductRemoveCart } from '../redux/actions'
+import { Link } from 'react-router-dom'
 
 function Cart() {
   const { GeneralResponse } = useSelector(state => state)
@@ -62,13 +63,15 @@ const removecart = (id)=>{
           GeneralResponse.cart.map((product,productkey)=>{
             return(
               <div className='product shadow-sm' key={productkey}>
+                <Link to={`/shop/product/${product.id}`}>
                 <div className="imgdiv">
                   <img src={product.imgUrl} alt="" />
                 </div>
+                </Link>
                 <div className="details">
                   <div className="textcontent">
-                    <div className='info'>
-                      <h1>{product.productName}</h1>
+                    <div className='info mt-2'>
+                      <Link className='h1'  to={`/shop/product/${product.id}`}>{product.productName}</Link>
                       {product.sizes == "" ? (null):(
                         <p className='size mt-1'><span>Size:</span><span className='text-dark ms-2'>{product.sizes}</span></p>
                       )}
