@@ -9,6 +9,7 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
 import ProductDetails from './components/ProductDetails';
+import MyOrders from './components/MyOrders';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/orders" element={<MyOrders />} />
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
