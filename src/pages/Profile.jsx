@@ -39,7 +39,7 @@ function Profile() {
         </div>
         ):(null)}
         
-        <div className="myorders rounded shadow px-2 py-3 mt-3">
+        <div className="myorders mt-4">
           <div className="info">
             <h2>My Orders</h2>
             <p className='mt-1'>Alredy have 12 orders</p>
@@ -49,7 +49,7 @@ function Profile() {
           </div>
         </div>
 
-        <div className="myorders rounded shadow px-2 py-3 mt-3">
+        <div className="myorders  mt-4">
           <div className="info">
             <h2>Shipping addresses</h2>
             <p className='mt-1'>3 address</p>
@@ -59,7 +59,7 @@ function Profile() {
           </div>
         </div>
 
-        <div className="myorders rounded shadow px-2 py-3 mt-3">
+        <div className="myorders mt-4">
           <div className="info">
             <h2>Settings</h2>
             <p className='mt-1'>Password, Log Out</p>
