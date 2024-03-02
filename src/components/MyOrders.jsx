@@ -51,7 +51,7 @@ function MyOrders() {
                 </div>
                 <div className="details mt-3">
                     <div className='btn btn-outline-dark px-4'>Details</div>
-                    <div className='status text-primary'>Delivered</div>
+                    <div className='status text-primary'>Cancelled</div>
                 </div>
             </div>
         </div>

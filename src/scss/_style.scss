@@ -780,7 +780,7 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 135px;
+    padding-bottom: 175px;
     .header{
         --bs-bg-opacity: .7;
         backdrop-filter: blur(10px);
@@ -921,13 +921,13 @@ a{
         --bs-bg-opacity: .7;
         backdrop-filter: blur(3px);
         position: fixed;
-        bottom: 70px;
+        bottom: 120px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
         z-index: 101;
-        width: 100%;
+        width: 90%;
         height: 50px;
         background-color: $white;
         .total{
@@ -946,6 +946,21 @@ a{
                 color: #9B9B9B;
             }
         }
+    }
+    .neworder{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        height: 50px;
+        position: fixed;
+        bottom: 70px;
+        z-index: 102;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        border-radius: 0px!important;
     }
 }
 .favorites{

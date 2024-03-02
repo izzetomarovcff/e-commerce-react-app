@@ -24,6 +24,11 @@ export default (state = INITIAL_STATE, action)=>{
                 newcart[plusindex].count ++
                 return { ...state, cart: newcart }
             }
+        case "CLEAR_CART":
+            let delcart = state.cart
+            let dellenght = delcart.length
+            delcart.splice(0,dellenght)
+            return{...state, cart: delcart}
         case "PRODUCT_MINUS":
             let minusproduct = state.cart.find(item=>item.id == action.payload)
             let minusindex = state.cart.indexOf(minusproduct)

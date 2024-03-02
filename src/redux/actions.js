@@ -28,3 +28,8 @@ export const ProductRemoveCart = id =>{
         payload: id
     }
 }
+export const ClearCart = () =>{
+    return {
+        type: 'CLEAR_CART',
+    }
+}
