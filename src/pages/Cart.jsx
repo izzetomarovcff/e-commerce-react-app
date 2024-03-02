@@ -11,6 +11,8 @@ function Cart() {
   const [sum, setSum] = useState(0)
   const [oldSum, setOldSum] = useState(null)
   const [authuser, setAuthUser] = useState(null)
+  const [reserror, setResError] = useState(null)
+  const [success, setSucces] = useState(null)
   const dispatch = useDispatch()
   useEffect(() => {
     let total = 0
@@ -63,7 +65,7 @@ function Cart() {
           orderStatus: "processing",
           products: GeneralResponse.cart
         }
-        await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/orders.json`,
+        let response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/orders.json`,
           {
             method: "POST",
             headers: {
@@ -71,7 +73,18 @@ function Cart() {
             },
             body: JSON.stringify(newOrderOBJ)
           })
-          dispatch(ClearCart())
+          if(response.ok){
+            dispatch(ClearCart())
+            setSucces("New Order Successfully Added!")
+            setTimeout(() => {
+              setSucces(null)
+            }, 3000);
+          }else{
+            setResError("An Error Occured Try Again!")
+            setTimeout(() => {
+              setResError(null)
+            }, 3000);
+          }
       }
     } catch (error) {
       console.log(error)
@@ -81,6 +94,9 @@ function Cart() {
   }
   return (
     <div className='cart'>
+      {reserror?(<div className='alert alert-danger'>{reserror}</div>):(null)}
+      {success?(<div className='alert alert-success'>{success}</div>):(null)}
+      
       <div className='header bg-secondary'>My Bag</div>
       <div className='products'>
         {GeneralResponse.cart.length == 0 ? (
