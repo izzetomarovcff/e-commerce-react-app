@@ -31,7 +31,7 @@ function Profile() {
       <div className='header bg-secondary'>My Profile</div>
       <div className="profilecontainer">
         {authUser ? (
-          <div className='profile rounded mb-4'>
+          <div className='profile rounded'>
           <div className="imgprofile shadow">
             <img src="/icons/profile.svg" alt="" />
           </div>
@@ -48,11 +48,41 @@ function Profile() {
             <img src="/icons/chevron_right.svg" alt="" />
           </div>
         </div>
-
+        
         <div className="myorders  mt-4">
           <div className="info">
             <h2>Shipping addresses</h2>
             <p className='mt-1'>3 address</p>
+          </div>
+          <div className="to">
+            <img src="/icons/chevron_right.svg" alt="" />
+          </div>
+        </div>
+
+        <div className="myorders  mt-4">
+          <div className="info">
+            <h2>Payment methods</h2>
+            <p className='mt-1'>Visa  **34</p>
+          </div>
+          <div className="to">
+            <img src="/icons/chevron_right.svg" alt="" />
+          </div>
+        </div>
+
+        <div className="myorders  mt-4">
+          <div className="info">
+            <h2>Promocodes</h2>
+            <p className='mt-1'>SALESUMMER</p>
+          </div>
+          <div className="to">
+            <img src="/icons/chevron_right.svg" alt="" />
+          </div>
+        </div>
+
+        <div className="myorders  mt-4">
+          <div className="info">
+            <h2>My reviews</h2>
+            <p className='mt-1'>4 items</p>
           </div>
           <div className="to">
             <img src="/icons/chevron_right.svg" alt="" />

@@ -1116,6 +1116,8 @@ a{
         z-index: 100;
         font-size: 27px;
         font-weight: 600;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
     .profilecontainer{
         width: 90%;
@@ -1126,6 +1128,7 @@ a{
             align-items: center;
             justify-content: flex-start;
             width: 100%;
+            margin-bottom: 40px ;
             .imgprofile{
                 display: flex;
                 align-items: center;
