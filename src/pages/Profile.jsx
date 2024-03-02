@@ -27,9 +27,50 @@ function Profile() {
     })
   }
   return (
-    <div>
-      {authUser ? (<h1 className='mx-5 text-center text-primary border border-primary rounded p-3'>You Logged In As: {authUser.email}</h1>) : (null)}
-      {authUser ? (<button className='btn btn-primary mt-3 mb-5' onClick={userSignOut}>Sign Out</button>) : (null)}
+    <div className='profilepage'>
+      <div className='header bg-secondary'>My Profile</div>
+      <div className="profilecontainer">
+        {authUser ? (
+          <div className='profile rounded mb-4'>
+          <div className="imgprofile shadow">
+            <img src="/icons/profile.svg" alt="" />
+          </div>
+          <div className='email'>{authUser.email}</div>
+        </div>
+        ):(null)}
+        
+        <div className="myorders rounded shadow px-2 py-3 mt-3">
+          <div className="info">
+            <h2>My Orders</h2>
+            <p className='mt-1'>Alredy have 12 orders</p>
+          </div>
+          <div className="to">
+            <img src="/icons/chevron_right.svg" alt="" />
+          </div>
+        </div>
+
+        <div className="myorders rounded shadow px-2 py-3 mt-3">
+          <div className="info">
+            <h2>Shipping addresses</h2>
+            <p className='mt-1'>3 address</p>
+          </div>
+          <div className="to">
+            <img src="/icons/chevron_right.svg" alt="" />
+          </div>
+        </div>
+
+        <div className="myorders rounded shadow px-2 py-3 mt-3">
+          <div className="info">
+            <h2>Settings</h2>
+            <p className='mt-1'>Password, Log Out</p>
+          </div>
+          <div className="to">
+            <img src="/icons/chevron_right.svg" alt="" />
+          </div>
+        </div>
+      </div>
+      {/* {authUser ? (<h1 className='mx-5 text-center text-primary border border-primary rounded p-3'>You Logged In As: {authUser.email}</h1>) : (null)}
+      {authUser ? (<button className='btn btn-primary mt-3 mb-5' onClick={userSignOut}>Sign Out</button>) : (null)} */}
       <Footernavbar />
     </div>
   )
