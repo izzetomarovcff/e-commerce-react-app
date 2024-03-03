@@ -59,9 +59,24 @@ function Cart() {
   const newOrder = async () => {
     try {
       if (GeneralResponse.cart.length != 0) {
+        const currentDate = new Date();
+        const day = currentDate.getDate();
+        const month = currentDate.getMonth() + 1;
+        const year = currentDate.getFullYear();
+        let totalCount  = 0
+        let totalAmmount  = 0
+        GeneralResponse.cart.forEach(element => {
+          totalCount = totalCount + element.count
+        });
+        GeneralResponse.cart.forEach(element=>{
+          totalAmmount = totalAmmount + element.count*element.price
+        })
         let newOrderOBJ = {
-          orderId: "",
+          id: "",
+          date: `${day<10? (`0${day}`):(day)}-${month<10 ? (`0${month}`):(month)}-${year}`,
           orderOwnerEmail: authuser.email,
+          totalcount: totalCount,
+          totalammount: totalAmmount,
           orderStatus: "processing",
           products: GeneralResponse.cart
         }

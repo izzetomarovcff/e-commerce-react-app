@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 function Profile() {
   const [authUser, setAuthUser] = useState(null)
+  const [orders, setOrders] = useState(null)
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       // console.log(user.email) //check token status
@@ -20,6 +21,26 @@ function Profile() {
       listen()
     }
   }, [])
+  useEffect(()=>{
+    const getData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/orders.json`)
+        let resData = await response.json()
+        let arr = []
+        for (const key in resData) {
+          if (resData[key].orderOwnerEmail == authUser.email) {
+            arr.unshift({ ...resData[key], id: key })
+          }
+        }
+        console.log("red")
+
+        setOrders(arr)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getData()
+  },[authUser])
   const userSignOut = () => {
     signOut(auth).then(() => {
       console.log("Sigin Out Successfully")
@@ -43,7 +64,7 @@ function Profile() {
         <Link to={"/profile/orders"} className="itembox mt-4">
           <div className="info">
             <h2>My Orders</h2>
-            <p className='mt-1'>Alredy have 12 orders</p>
+            <p className='mt-1'>Alredy have {orders?(orders.length):(0)} orders</p>
           </div>
           <div className="to">
             <img src="/icons/chevron_right.svg" alt="" />

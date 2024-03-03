@@ -759,6 +759,10 @@ a{
                 border-radius: 25px 0 0 25px!important;
                 width: 40%;
                 height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
             }
             .productcount{
                 font-size: 20px;
@@ -769,6 +773,11 @@ a{
                 border-radius: 0 25px 25px 0!important;
                 width: 40%;
                 height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
+
 
             }
         }
@@ -1247,11 +1256,16 @@ a{
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                .orderid{
+                .orderidtext{
                     font-size: 16px;
                     font-weight: 600;
                     margin: 0;
                     padding: 0;
+                    color: #9B9B9B;
+                    .orderid{
+                        font-size: 13px;
+                        color: $dark;
+                    }
                 }
                 .date{
                     font-size: 14px;
