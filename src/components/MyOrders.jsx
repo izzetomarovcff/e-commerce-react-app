@@ -59,12 +59,12 @@ function MyOrders() {
                                 </div>
                                 <div className="quantitiyandprice mt-3">
                                     <p>Quantity: 
-                                        <span className='text-dark'>
+                                        <span className='text-dark ms-2'>
                                             {order.totalcount}
                                         </span>
                                     </p>
                                     <p>Total Amount: 
-                                        <span className='text-dark'>
+                                        <span className='text-dark ms-2'>
                                             {order.totalammount}$
                                         </span>
                                     </p>

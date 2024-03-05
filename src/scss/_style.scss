@@ -1306,3 +1306,160 @@ a{
         }
     }
 }
+.orderdetails{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .orderheader{
+        z-index: 100;
+        --bs-bg-opacity: .7;
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 50px;
+        .backicon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 10px;
+            width: min-content;
+            height: 100%;
+            cursor: pointer;
+        }
+        .orderid{
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .shareicon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 15px;
+            width: min-content;
+            height: 100%;
+            cursor: pointer;
+            padding-left: 10px;
+        }
+    }
+    .order{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        .orderidanddate{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            h6{
+                .text{
+                    font-weight: 600;
+                }
+                .idtext{
+                    color: #9B9B9B;
+                    font-size: 14px;
+                }
+                font-size: 17px;
+            }
+            .date{
+                color: #9B9B9B;
+                font-size: 14px;
+            }
+        }
+        .status{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .productcount{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            font-size: 17px;
+            font-weight: 500;
+        }
+        .otherinfo{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            font-size: 18px;
+            font-weight: 600;
+            
+        }
+        .otherdetails{
+            width: 100%;
+            color: #9B9B9B;
+            font-weight: 500;
+            margin-bottom: 0;
+            .totalamount{
+                font-weight: 600;
+            }
+        }
+        .product{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-radius: 8px;
+            height: 155px;
+            .imgdiv{
+                width: 35%;
+                height: 100%;
+                border-radius: 8px 0 0 8px;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 8px 0 0 8px;
+
+                }
+            }
+            .details{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 64%;
+                border-radius: 0 8px 8px 0;
+                h2{
+                    font-size: 25px;
+                    font-weight: 600;
+                    margin-bottom: 0;
+                }
+                p{
+                    font-size: 18px;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                    .text-dark{
+                        font-weight: 500;
+                    }
+                }
+                .countandprice{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    p{
+                        font-size: 18px;
+                        margin-bottom: 0;
+                        padding-bottom: 0;
+                        .text-dark{
+                            font-weight: 500;
+                        }
+                    }
+                    .price{
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}
