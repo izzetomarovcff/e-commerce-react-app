@@ -10,9 +10,6 @@ function Cart() {
   const { GeneralResponse } = useSelector(state => state)
   const [sum, setSum] = useState(0)
   const [oldSum, setOldSum] = useState(null)
-  const [authuser, setAuthUser] = useState(null)
-  const [reserror, setResError] = useState(null)
-  const [success, setSucces] = useState(null)
   const dispatch = useDispatch()
   useEffect(() => {
     let total = 0
@@ -27,7 +24,6 @@ function Cart() {
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setAuthUser(user)
       } else {
         window.location.href = "/signup"
       }
@@ -56,61 +52,10 @@ function Cart() {
       dispatch(ProductRemoveCart(id))
     }
   }
-  const newOrder = async () => {
-    try {
-      if (GeneralResponse.cart.length != 0) {
-        const currentDate = new Date();
-        const day = currentDate.getDate();
-        const month = currentDate.getMonth() + 1;
-        const year = currentDate.getFullYear();
-        let totalCount  = 0
-        let totalAmmount  = 0
-        GeneralResponse.cart.forEach(element => {
-          totalCount = totalCount + element.count
-        });
-        GeneralResponse.cart.forEach(element=>{
-          totalAmmount = totalAmmount + element.count*element.price
-        })
-        let newOrderOBJ = {
-          id: "",
-          date: `${day<10? (`0${day}`):(day)}-${month<10 ? (`0${month}`):(month)}-${year}`,
-          orderOwnerEmail: authuser.email,
-          totalcount: totalCount,
-          totalammount: totalAmmount,
-          orderStatus: "processing",
-          products: GeneralResponse.cart
-        }
-        let response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}/orders.json`,
-          {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newOrderOBJ)
-          })
-          if(response.ok){
-            dispatch(ClearCart())
-            setSucces("New Order Successfully Added!")
-            setTimeout(() => {
-              setSucces(null)
-            }, 3000);
-          }else{
-            setResError("An Error Occured Try Again!")
-            setTimeout(() => {
-              setResError(null)
-            }, 3000);
-          }
-      }
-    } catch (error) {
-      console.log(error)
-    }
-
-
-  }
+  
   return (
     <div className='cart'>
-      {reserror?(<div className='alert alert-danger'>{reserror}</div>):(null)}
-      {success?(<div className='alert alert-success'>{success}</div>):(null)}
+      
       
       <div className='header bg-secondary'>My Bag</div>
       <div className='products'>
@@ -161,9 +106,9 @@ function Cart() {
           })
         )}
       </div>
-      <div className="neworder btn btn-primary" onClick={newOrder}>
+      <Link to={GeneralResponse.cart.length == 0 ? ('/shop/women'):('/cart/neworder')} className="neworder btn btn-primary">
         Order Now
-      </div>
+      </Link>
       <div className="footer bg-white">
         <div className='total text-dark ms-4'>Total: </div>
         <div className="amount text-primary me-4">
