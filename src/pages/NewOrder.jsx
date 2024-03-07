@@ -114,7 +114,7 @@ function NewOrder() {
                         <p className='text-center w-75 mt-2'>Your order will be delivered soon. Thank you for choosing our app!</p>
                     </div>
                     <div className='button'>
-                        <Link to="/shop/women" className='btn btn-primary mb-2 w-100'>CONTINUE</Link>
+                        <Link to="/shop/women" className='btn btn-primary w-100'>CONTINUE</Link>
                     </div>
                     
                 </div>
