@@ -138,7 +138,7 @@ function NewOrder() {
                 </div>
                 <div className="mb-3 w-100">
                     <label htmlFor="card16digit" className="form-label">Card Number</label>
-                    <input type="number" name='card16digit' className="form-control" id="card16digit" value={order.card16digit} onChange={handleChange} autoComplete='off' required placeholder='1234 5678 9012 3456' />
+                    <input type="number" name='card16digit' className="form-control" id="card16digit" value={order.card16digit} onChange={handleChange} autoComplete='off' required placeholder='1234 5678 9012 3456' min={1000000000000000} max={9999999999999999}/>
                 </div>
                 <div className='order'>
                     <p className='text'>Order</p>
