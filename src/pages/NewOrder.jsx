@@ -107,14 +107,16 @@ function NewOrder() {
     return (
         <div className='neworderpage bg-secondary'>
             {success ? (
-                <div className="success">
-                    <img src="/image/success.svg" alt="" />
-                    <div className='elements bg-secondary text-primary'>
-                        Your order will be delivered soon. Thank you for choosing our app!
-                        <Link to={'/shop/women'} className="btn btn-outline-primary">
-                            Continue
-                        </Link>
+                <div className="success bg-secondary">
+                    <div className="imgandtext">
+                        <img src="/image/bags.svg" alt="" />
+                        <h1 className='mt-3'>Success!</h1>
+                        <p className='text-center w-75 mt-2'>Your order will be delivered soon. Thank you for choosing our app!</p>
                     </div>
+                    <div className='button'>
+                        <Link to="/shop/women" className='btn btn-primary mb-2 w-100'>CONTINUE</Link>
+                    </div>
+                    
                 </div>
             ) : (null)}
             {loading ? (
