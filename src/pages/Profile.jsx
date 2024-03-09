@@ -70,47 +70,6 @@ function Profile() {
             <img src="/icons/chevron_right.svg" alt="" />
           </div>
         </Link>
-        
-        <Link to={"/profile/addresses"} className="itembox  mt-4">
-          <div className="info">
-            <h2>Shipping addresses</h2>
-            <p className='mt-1'>3 address</p>
-          </div>
-          <div className="to">
-            <img src="/icons/chevron_right.svg" alt="" />
-          </div>
-        </Link>
-
-        <Link to={"/profile/paymentmethod"} className="itembox  mt-4">
-          <div className="info">
-            <h2>Payment methods</h2>
-            <p className='mt-1'>Visa  **34</p>
-          </div>
-          <div className="to">
-            <img src="/icons/chevron_right.svg" alt="" />
-          </div>
-        </Link>
-
-        <Link to={"/profile/promocodes"} className="itembox  mt-4">
-          <div className="info">
-            <h2>Promocodes</h2>
-            <p className='mt-1'>SALESUMMER</p>
-          </div>
-          <div className="to">
-            <img src="/icons/chevron_right.svg" alt="" />
-          </div>
-        </Link>
-
-        <Link to={"/profile/reviews"} className="itembox  mt-4">
-          <div className="info">
-            <h2>My reviews</h2>
-            <p className='mt-1'>4 items</p>
-          </div>
-          <div className="to">
-            <img src="/icons/chevron_right.svg" alt="" />
-          </div>
-        </Link>
-
         <Link to={"/profile/settings"} className="itembox mt-4">
           <div className="info">
             <h2>Settings</h2>
@@ -120,9 +79,8 @@ function Profile() {
             <img src="/icons/chevron_right.svg" alt="" />
           </div>
         </Link>
+        {authUser ? (<button className='btn btn-primary mt-3 mb-5' onClick={userSignOut}>Sign Out</button>) : (null)}
       </div>
-      {/* {authUser ? (<h1 className='mx-5 text-center text-primary border border-primary rounded p-3'>You Logged In As: {authUser.email}</h1>) : (null)} */}
-      {authUser ? (<button className='btn btn-primary mt-3 mb-5' onClick={userSignOut}>Sign Out</button>) : (null)}
       <Footernavbar />
     </div>
   )
