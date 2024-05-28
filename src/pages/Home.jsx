@@ -18,10 +18,6 @@ function Home() {
       listen()
     }
   }, [])
-
-
-
-
   return (
     <div className='homepage'>
       <div className='checksale'>
@@ -32,36 +28,30 @@ function Home() {
       </div>
       <HaveSaleProducts />
       <NewProducts />
-
-      <Link to={"/shop"} className='mt-5'>
+      <Link to={"/shop/women"} className='mt-5'>
         <div className='catalog'>
           <div className='catalogtext'>New Collection</div>
         </div>
       </Link>
-
       <div className='othercatalog'>
         <div className='othercatalog1'>
-          <Link to={"/shop"}>
+          <Link to={"/shop/women"}>
             <div className='othercatalog11'>
               <div className='othercatalog11text'>Summer<br></br>sale</div>
             </div>
           </Link>
-
-          <Link to={"/shop"}>
+          <Link to={"/shop/women"}>
             <div className='othercatalog12'>
               <div className='othercatalog12text'>Black</div>
             </div>
           </Link>
-
         </div>
-        <Link to={"/shop"}>
+        <Link to={"/shop/men"}>
           <div className='othercatalog2'>
             <div className='catalog2text'>Men's<br></br>hoodies</div>
           </div>
         </Link>
-
       </div>
-
       <Footernavbar />
     </div>
   )
